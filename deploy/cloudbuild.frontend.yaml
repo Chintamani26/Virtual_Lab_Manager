@@ -1,0 +1,12 @@
+# Builds the Next.js image with the backend URL baked in (NEXT_PUBLIC_* is compile-time).
+# Invoked by deploy/deploy-cloudrun.sh with _IMAGE and _API_URL substitutions.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "--build-arg", "NEXT_PUBLIC_API_URL=${_API_URL}", "-t", "${_IMAGE}", "."]
+images:
+  - "${_IMAGE}"
+substitutions:
+  _IMAGE: ""
+  _API_URL: ""
+options:
+  logging: CLOUD_LOGGING_ONLY

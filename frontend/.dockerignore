@@ -1,0 +1,15 @@
+node_modules
+.next
+.env
+.env.*
+.env.local
+.firebaserc
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+firebase-adminsdk*.json
+*.tsbuildinfo
+.DS_Store
+Dockerfile
+.dockerignore

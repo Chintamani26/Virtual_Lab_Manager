@@ -1,0 +1,231 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "department_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "role",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "practicals",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "course_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "execution_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "practical_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "student_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "mode",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_at",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "execution_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "practical_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_at",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ai_hint_logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "student_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "practical_id",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "exam_live",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "staff_ids",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "exam_live",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "practical_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "staff_ids",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "exam_live",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "course_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "practicals",
+      "fieldPath": "description",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "practicals",
+      "fieldPath": "starter_files",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "practicals",
+      "fieldPath": "test_cases",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "practicals",
+      "fieldPath": "rubric",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "practical_drafts",
+      "fieldPath": "files",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "submissions",
+      "fieldPath": "files",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "submissions",
+      "fieldPath": "test_results",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "submissions",
+      "fieldPath": "rubric_breakdown",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "submissions",
+      "fieldPath": "ai_feedback",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "submissions",
+      "fieldPath": "faculty_comment",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "submissions",
+      "fieldPath": "integrity",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "execution_logs",
+      "fieldPath": "files",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "execution_logs",
+      "fieldPath": "stdout",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "execution_logs",
+      "fieldPath": "stderr",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "execution_logs",
+      "fieldPath": "test_results",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "ai_hint_logs",
+      "fieldPath": "question",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "ai_hint_logs",
+      "fieldPath": "hint_text",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "proctoring_sessions",
+      "fieldPath": "baseline_files",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "proctoring_sessions",
+      "fieldPath": "stats",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "proctoring_sessions",
+      "fieldPath": "counts",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "proctoring_events",
+      "fieldPath": "detail",
+      "indexes": []
+    }
+  ]
+}
