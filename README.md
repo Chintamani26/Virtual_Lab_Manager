@@ -1,7 +1,7 @@
 # Virtual Lab Manager — Team Algorithm Rangers
 
 > **Startup Buildathon India 2026 — Final Prototype Submission**  
-> **Live Demo URL:** [https://cloudy-divx-fixed-consent.trycloudflare.com](https://cloudy-divx-fixed-consent.trycloudflare.com)  
+> **Live Demo URL:** [https://multimedia-let-columbus-visitor.trycloudflare.com](https://multimedia-let-columbus-visitor.trycloudflare.com)  
 > **Walkthrough Video:** [`Virtual_Lab_Manager_Full_Walkthrough.mp4`](./Virtual_Lab_Manager_Full_Walkthrough.mp4)  
 > **Final Presentation Deck:** [`Final_Prototype_Submission_Deck_Algorithm_Rangers.pptx`](./Final_Prototype_Submission_Deck_Algorithm_Rangers.pptx)
 
