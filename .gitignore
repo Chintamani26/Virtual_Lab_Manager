@@ -1,0 +1,38 @@
+# Python
+backend/.venv/
+Virtual_Lab_Manager/backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+Virtual_Lab_Manager/frontend/node_modules/
+Virtual_Lab_Manager/frontend/.next/
+*.tsbuildinfo
+
+# Secrets & environment files
+.env
+.env.*
+.env.local
+*.env
+*.env.*
+*.env.local
+!.env.example
+!.env.local.example
+.firebaserc
+*.pem
+*.key
+*.p12
+*.pfx
+*service-account*.json
+*credentials*.json
+firebase-adminsdk*.json
+
+# OS
+.DS_Store
+cloudflared.exe
+*.exe
+recordings/
+*.webm

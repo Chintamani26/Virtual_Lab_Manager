@@ -1,0 +1,68 @@
+rules_version = '2';
+
+// Virtual Lab Manager — Cloud Firestore security rules.
+// Design: docs/FIRESTORE_DESIGN.md
+//
+// The FastAPI backend writes everything through the Firebase Admin SDK, which bypasses these rules.
+// Browsers get read-only, real-time access to exactly two things:
+//   1. their own profile                      users/{userId}
+//   2. the live exam status mirror            exam_live/{practicalId}__{studentId}
+// Everything else — code, hidden tests, grades, integrity reports, the tab-claim secret in
+// exam_attempts — is server-only and falls through to the deny-all rule at the bottom.
+//
+// Identity comes from custom claims set by POST /api/auth/session:
+//   app_uid        users/{id} of the signed-in person
+//   role           'student' | 'faculty' | 'hod'
+//   department_id  their department
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null
+        && request.auth.token.app_uid is string
+        && request.auth.token.role in ['student', 'faculty', 'hod'];
+    }
+
+    function me() {
+      return request.auth.token.app_uid;
+    }
+
+    function isStaff() {
+      return signedIn() && request.auth.token.role in ['faculty', 'hod'];
+    }
+
+    // ---------------------------------------------------------------- users
+    match /users/{userId} {
+      allow get: if signedIn() && userId == me();
+      allow list, create, update, delete: if false;
+    }
+
+    // ---------------------------------------------------------------- exam_live
+    // Doc id = "{practicalId}__{studentId}". Contains display fields only (status, lock_reason,
+    // violations, timestamps, staff_ids) — never the active session id.
+    match /exam_live/{attemptId} {
+      // Single-doc reads: a student may subscribe to their own attempt even before it exists
+      // (the id itself proves ownership); staff need to be listed on the existing doc.
+      allow get: if signedIn() && (
+        attemptId.split('__')[1] == me()
+        || (isStaff() && resource != null && me() in resource.data.staff_ids)
+      );
+
+      // Queries: must be constrained so every result is provably readable —
+      //   students:  where('student_id', '==', me)
+      //   staff:     where('staff_ids', 'array-contains', me)  [+ practical_id / status filters]
+      allow list: if signedIn() && (
+        resource.data.student_id == me()
+        || (isStaff() && me() in resource.data.staff_ids)
+      );
+
+      allow create, update, delete: if false;
+    }
+
+    // ---------------------------------------------------------------- everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

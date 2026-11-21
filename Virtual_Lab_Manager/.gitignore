@@ -1,0 +1,30 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+*.tsbuildinfo
+
+# Secrets & environment files
+.env
+.env.*
+.env.local
+!.env.example
+!.env.local.example
+.firebaserc
+*.pem
+*.key
+*.p12
+*.pfx
+*service-account*.json
+*credentials*.json
+firebase-adminsdk*.json
+
+# OS
+.DS_Store
+cloudflared.exe
+*.exe
