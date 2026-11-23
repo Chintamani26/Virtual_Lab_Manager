@@ -31,6 +31,7 @@ from app.routers.tutor import transcript_out
 from app.security import FacultyUser
 from app.services import exam
 from app.services.analytics import faculty_practical_stats
+from app.services import intelligence as intel
 from app.services.views import courses_out, practical_out, submissions_out
 
 router = APIRouter(prefix="/api/faculty", tags=["faculty"])
@@ -286,3 +287,77 @@ async def alerts(user: FacultyUser, svc: Svc):
     ]
     out.sort(key=lambda x: x.locked_at or utcnow(), reverse=True)
     return AlertsResponse(locked_count=len(out), locked=out)
+
+
+# ---------------------------------------------------------------- Student & Faculty Intelligence
+@router.get("/intelligence/performance")
+async def intelligence_performance(user: FacultyUser, svc: Svc, course_id: str | None = None):
+    """Score distributions, rubric breakdowns, hint usage — per practical."""
+    repo = svc.repo
+    courses = await staff_courses(svc, user)
+    if course_id:
+        courses = [c for c in courses if c.id == course_id]
+    course_by_id = {c.id: c for c in courses}
+    practicals = await repo.list_practicals(list(course_by_id), published_only=True)
+    pids = [p.id for p in practicals]
+    subs = await repo.list_submissions(practical_ids=pids) if pids else []
+    hints = await repo.list_hint_logs(practical_ids=pids) if pids else []
+    enrollments = await repo.list_enrollments(list(course_by_id))
+    return intel.faculty_student_performance(courses, practicals, enrollments, subs, hints)
+
+
+@router.get("/intelligence/workload")
+async def intelligence_workload(user: FacultyUser, svc: Svc):
+    """Pending review counts, turnaround velocity, per-course breakdown."""
+    repo = svc.repo
+    courses = await staff_courses(svc, user)
+    course_by_id = {c.id: c for c in courses}
+    practicals = await repo.list_practicals(list(course_by_id))
+    pids = [p.id for p in practicals]
+    subs = await repo.list_submissions(practical_ids=pids) if pids else []
+    return intel.faculty_workload(user.id, courses, practicals, subs)
+
+
+@router.get("/intelligence/completion")
+async def intelligence_completion(user: FacultyUser, svc: Svc):
+    """Completion tracking: submitted / overdue counts and pacing gaps per practical."""
+    repo = svc.repo
+    courses = await staff_courses(svc, user)
+    course_by_id = {c.id: c for c in courses}
+    practicals = await repo.list_practicals(list(course_by_id), published_only=True)
+    pids = [p.id for p in practicals]
+    subs = await repo.list_submissions(practical_ids=pids) if pids else []
+    enrollments = await repo.list_enrollments(list(course_by_id))
+    return intel.faculty_completion_tracking(courses, practicals, enrollments, subs)
+
+
+@router.get("/intelligence/at-risk")
+async def intelligence_at_risk(user: FacultyUser, svc: Svc):
+    """Deterministic risk scores and reasons for students in faculty's courses."""
+    repo = svc.repo
+    courses = await staff_courses(svc, user)
+    course_by_id = {c.id: c for c in courses}
+    practicals = await repo.list_practicals(list(course_by_id), published_only=True)
+    pids = [p.id for p in practicals]
+    subs = await repo.list_submissions(practical_ids=pids) if pids else []
+    hints = await repo.list_hint_logs(practical_ids=pids) if pids else []
+    enrollments = await repo.list_enrollments(list(course_by_id))
+    # Collect all enrolled student IDs
+    student_ids = list({sid for ids in enrollments.values() for sid in ids})
+    students = await repo.get_users(student_ids)
+    result = intel.faculty_at_risk_students(courses, practicals, enrollments, subs, hints, students)
+    return {"generated_at": utcnow().isoformat(), "students": result}
+
+
+@router.get("/intelligence/heatmap")
+async def intelligence_heatmap(user: FacultyUser, svc: Svc):
+    """Test-level fail rates and hint usage — difficulty heatmap."""
+    repo = svc.repo
+    courses = await staff_courses(svc, user)
+    course_by_id = {c.id: c for c in courses}
+    practicals = await repo.list_practicals(list(course_by_id), published_only=True)
+    pids = [p.id for p in practicals]
+    executions = await repo.list_execution_logs(pids) if pids else []
+    hints = await repo.list_hint_logs(practical_ids=pids) if pids else []
+    rows = intel.faculty_difficulty_heatmap(courses, practicals, executions, hints)
+    return {"generated_at": utcnow().isoformat(), "rows": rows}

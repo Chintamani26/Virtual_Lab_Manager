@@ -38,6 +38,13 @@ import type {
   TutorThread,
   TutorTranscript,
   User,
+  // Intelligence types
+  IntelPerformanceReport,
+  FacultyWorkloadReport,
+  CompletionRow,
+  IntelAtRiskReport,
+  IntelHeatmapReport,
+  HodFacultyWorkloadReport,
 } from "./types";
 import { firebaseEnabled, firebaseIdToken, firebaseSignIn, firebaseSignOut, watchIdToken } from "./firebase";
 
@@ -352,6 +359,21 @@ export const api = {
   complianceReport: () => request<ComplianceReport>("/hod/compliance-report"),
   complianceCsv: () => request<Response>("/hod/compliance-report?format=csv", { raw: true }),
   ask: (question: string) => request<AskResponse>("/hod/ask", { method: "POST", body: { question } }),
+
+  // Faculty Intelligence
+  facultyPerformance: (courseId?: string) =>
+    request<IntelPerformanceReport>(`/faculty/intelligence/performance${courseId ? `?course_id=${courseId}` : ""}`),
+  facultyWorkload: () => request<FacultyWorkloadReport>("/faculty/intelligence/workload"),
+  facultyCompletion: () => request<CompletionRow[]>("/faculty/intelligence/completion"),
+  facultyAtRisk: () => request<IntelAtRiskReport>("/faculty/intelligence/at-risk"),
+  facultyHeatmap: () => request<IntelHeatmapReport>("/faculty/intelligence/heatmap"),
+
+  // HOD Intelligence
+  hodPerformance: () => request<IntelPerformanceReport>("/hod/intelligence/performance"),
+  hodFacultyWorkload: () => request<HodFacultyWorkloadReport>("/hod/intelligence/faculty-workload"),
+  hodAtRisk: () => request<IntelAtRiskReport>("/hod/intelligence/at-risk"),
+  hodHeatmap: () => request<IntelHeatmapReport>("/hod/intelligence/heatmap"),
+  hodCompletion: () => request<CompletionRow[]>("/hod/intelligence/completion"),
 };
 
 // ---------- formatting helpers ----------

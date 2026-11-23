@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PageContainer } from "@/components/AppShell";
 import { DifficultiesCard } from "@/components/insights";
 import { IntegrityBadge } from "@/components/integrity";
+import { AtRiskCard, CompletionCard, HeatmapCard, PerformanceCard, WorkloadCard } from "@/components/intelligence";
 import {
   Button,
   Card,
@@ -39,7 +40,7 @@ const th = "px-3 py-2.5 font-medium";
 const primaryLink = "font-medium text-indigo-600 hover:text-indigo-500";
 const secondaryLink = "text-slate-600 hover:text-slate-900";
 
-type DashboardTab = "practicals" | "submissions" | "courses" | "insights";
+type DashboardTab = "practicals" | "submissions" | "courses" | "insights" | "intelligence";
 
 function DueText({ dueAt }: { dueAt: string | null }) {
   const d = relativeDue(dueAt);
@@ -106,6 +107,7 @@ export default function FacultyDashboardPage() {
     { key: "practicals", label: "Practicals", count: data.practicals.length },
     { key: "submissions", label: "Submissions", count: data.recent_submissions.length },
     { key: "insights", label: "Where students struggle" },
+    { key: "intelligence", label: "Intelligence" },
     ...(data.courses.length > 0 ? [{ key: "courses" as const, label: "Courses", count: data.courses.length }] : []),
   ];
 
@@ -343,6 +345,16 @@ export default function FacultyDashboardPage() {
       {tab === "insights" && (
         <div className="mt-6">
           <DifficultiesCard scope="faculty" />
+        </div>
+      )}
+
+      {tab === "intelligence" && (
+        <div className="mt-6 space-y-6">
+          <PerformanceCard scope="faculty" />
+          <WorkloadCard scope="faculty" />
+          <CompletionCard scope="faculty" />
+          <AtRiskCard scope="faculty" />
+          <HeatmapCard scope="faculty" />
         </div>
       )}
 

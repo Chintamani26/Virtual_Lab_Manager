@@ -13,6 +13,7 @@ from app.models import utcnow
 from app.schemas import AskRequest, AskResponse, AssignFacultyRequest, CourseOut
 from app.security import HodUser
 from app.services import analytics
+from app.services import intelligence as intel
 from app.services.views import courses_out
 
 router = APIRouter(prefix="/api/hod", tags=["hod"])
@@ -85,3 +86,42 @@ async def compliance_report(user: HodUser, svc: Svc, format: Literal["json", "cs
 async def ask(body: AskRequest, user: HodUser, svc: Svc):
     data = await analytics.load_department(svc.repo, user.department_id)
     return await svc.analyst.ask(body.question, analytics.llm_snapshot(data))
+
+
+# ---------------------------------------------------------------- HOD Intelligence
+@router.get("/intelligence/performance")
+async def hod_intelligence_performance(user: HodUser, svc: Svc):
+    """Dept-wide student performance analytics."""
+    data = await analytics.load_department(svc.repo, user.department_id)
+    return intel.hod_student_performance(data)
+
+
+@router.get("/intelligence/faculty-workload")
+async def hod_intelligence_faculty_workload(user: HodUser, svc: Svc):
+    """Per-faculty workload: pending review, turnaround, completion, imbalance flags."""
+    data = await analytics.load_department(svc.repo, user.department_id)
+    return intel.hod_faculty_workload(data)
+
+
+@router.get("/intelligence/at-risk")
+async def hod_intelligence_at_risk(user: HodUser, svc: Svc):
+    """Extended at-risk student list with risk scores, reasons, and actions."""
+    data = await analytics.load_department(svc.repo, user.department_id)
+    students = data.students
+    result = intel.hod_at_risk_extended(data)
+    return {"generated_at": utcnow().isoformat(), "students": result}
+
+
+@router.get("/intelligence/heatmap")
+async def hod_intelligence_heatmap(user: HodUser, svc: Svc):
+    """Dept-wide test-level difficulty heatmap."""
+    data = await analytics.load_department(svc.repo, user.department_id)
+    rows = intel.hod_difficulty_heatmap(data)
+    return {"generated_at": utcnow().isoformat(), "rows": rows}
+
+
+@router.get("/intelligence/completion")
+async def hod_intelligence_completion(user: HodUser, svc: Svc):
+    """Dept-wide completion tracking across all practicals."""
+    data = await analytics.load_department(svc.repo, user.department_id)
+    return intel.hod_completion(data)

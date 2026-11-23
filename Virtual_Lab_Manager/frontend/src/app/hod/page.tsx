@@ -6,6 +6,7 @@ import { PageContainer } from "@/components/AppShell";
 import { AnalyticsChat } from "@/components/AnalyticsChat";
 import { BriefingCard, DifficultiesCard } from "@/components/insights";
 import { ActivityCharts, ScoreDistributionChart, ViewToggle } from "@/components/HodCharts";
+import { AtRiskCard, CompletionCard, HeatmapCard, PerformanceCard, WorkloadCard } from "@/components/intelligence";
 import {
   Button,
   Card,
@@ -28,7 +29,7 @@ import { api, fmtDate, fmtPct } from "@/lib/api";
 import type { ComplianceReport, FacultyMember, HodOverview } from "@/lib/types";
 import { useApi } from "@/lib/useApi";
 
-type HodTab = "overview" | "insights" | "courses" | "compliance" | "ask";
+type HodTab = "overview" | "insights" | "intelligence" | "courses" | "compliance" | "ask";
 type ComplianceFilter = "all" | "at_risk" | "non_compliant";
 
 const THEAD = "text-xs text-slate-500";
@@ -119,6 +120,7 @@ export default function HodDashboardPage() {
   const tabs: { key: HodTab; label: string; count?: number }[] = [
     { key: "overview", label: "Overview" },
     { key: "insights", label: "AI insights" },
+    { key: "intelligence", label: "Intelligence" },
     { key: "courses", label: "Courses", count: data.courses.length },
     { key: "compliance", label: "Compliance", count: compliance?.rows.length },
     { key: "ask", label: "Ask" },
@@ -420,6 +422,16 @@ export default function HodDashboardPage() {
         <div className="mt-6 space-y-6">
           <BriefingCard />
           <DifficultiesCard scope="hod" />
+        </div>
+      )}
+
+      {tab === "intelligence" && (
+        <div className="mt-6 space-y-6">
+          <PerformanceCard scope="hod" />
+          <WorkloadCard scope="hod" />
+          <CompletionCard scope="hod" />
+          <AtRiskCard scope="hod" />
+          <HeatmapCard scope="hod" />
         </div>
       )}
 

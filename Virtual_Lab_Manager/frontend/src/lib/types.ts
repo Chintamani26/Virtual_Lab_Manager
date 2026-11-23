@@ -772,3 +772,111 @@ export interface DepartmentBriefing {
   model: string;
   source: "gemini" | "fallback";
 }
+
+// ---------- Student & Faculty Intelligence (v1.7) ----------
+
+export interface RubricBreakdownItem {
+  criterion_id: string;
+  criterion_name: string;
+  avg_score: number;
+  max_points: number;
+  avg_pct: number;
+}
+
+export interface PerformancePractical {
+  practical_id: string;
+  practical_title: string;
+  course_code: string;
+  lab_type: LabType;
+  enrolled: number;
+  submitted: number;
+  avg_score_pct: number | null;
+  pass_rate: number | null;
+  score_distribution: { bucket: string; count: number }[];
+  rubric_breakdown: RubricBreakdownItem[];
+  hint_usage: { total: number; avg_per_student: number };
+}
+
+export interface PerformanceCourse {
+  course_id: string;
+  course_code: string;
+  course_title: string;
+  practicals: PerformancePractical[];
+}
+
+export interface IntelPerformanceReport {
+  generated_at: string;
+  courses: PerformanceCourse[];
+}
+
+export interface FacultyWorkloadReport {
+  pending_review: number;
+  oldest_pending_days: number | null;
+  reviewed_this_week: number;
+  avg_turnaround_days: number | null;
+  by_course: { course_code: string; course_title: string; pending: number; reviewed: number }[];
+}
+
+export interface CompletionRow {
+  practical_id: string;
+  practical_title: string;
+  course_code: string;
+  due_at: string | null;
+  enrolled: number;
+  submitted: number;
+  overdue: number;
+  completion_pct: number;
+  pacing_gap: boolean;
+}
+
+export interface AtRiskStudentExtended {
+  student_id: string;
+  student_name: string;
+  roll_number: string | null;
+  risk_score: number;
+  risk_level: "high" | "medium" | "low";
+  risk_reasons: string[];
+  completion_rate: number;
+  avg_score_pct: number | null;
+  overdue_count: number;
+  courses: string[];
+  recommended_action: string;
+}
+
+export interface IntelAtRiskReport {
+  generated_at: string;
+  students: AtRiskStudentExtended[];
+}
+
+export interface DifficultyHeatmapRow {
+  course_code: string;
+  practical_title: string;
+  test_name: string;
+  fail_rate: number;
+  students_failed: number;
+  attempts: number;
+  hint_requests: number;
+}
+
+export interface IntelHeatmapReport {
+  generated_at: string;
+  rows: DifficultyHeatmapRow[];
+}
+
+export interface HodFacultyWorkloadRow {
+  faculty_id: string;
+  faculty_name: string;
+  courses_taught: number;
+  practicals_count: number;
+  pending_review: number;
+  oldest_pending_days: number | null;
+  avg_turnaround_days: number | null;
+  avg_completion_rate: number | null;
+  workload_flag: boolean;
+}
+
+export interface HodFacultyWorkloadReport {
+  generated_at: string;
+  dept_avg_pending: number;
+  faculty: HodFacultyWorkloadRow[];
+}
