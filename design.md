@@ -1,19 +1,18 @@
-# Virtual Lab Manager (VLM) — Comprehensive UI/UX Product Design Specification
-> **Document Version:** 2.0.0  
-> **Status:** Approved Architecture & UI/UX Design Blueprint  
-> **Target Audience:** Product Engineers, UI/UX Designers, Frontend Developers, Institutional Stakeholders  
-> **Design Philosophy:** "Developer-First Academic SaaS" — High-density, zero-latency dark IDE for learners; clean, high-clarity executive light workspaces for educators and administrators.
+# Virtual Lab Manager (VLM) — Comprehensive Product Understanding & UI/UX Design Specification
+> **Document Status:** Complete Single-Source-of-Truth Architecture & UI/UX Blueprint  
+> **Role Context:** Senior Product Manager, Lead Product Designer, UI/UX Architect, UX Researcher, and Design Systems Engineer  
+> **Target Framework:** Next.js 16 (App Router) + React 19 + Tailwind CSS v4 + Monaco Editor  
+> **Backend Architecture:** FastAPI (Python 3.12 ASGI) + Gemini 3.5 & Gemma AI  
+> **Design Thesis:** "Developer-First Academic SaaS" — Dual-mode visual architecture uniting high-density, zero-latency dark IDE workspaces for students with crisp, high-clarity executive light workspaces for faculty and administration.
 
 ---
 
 ## 1. Product Overview
-**Virtual Lab Manager (VLM)** is an enterprise-grade academic laboratory operating system engineered specifically for engineering universities, technical colleges, and STEM educational institutions. It replaces physical computer laboratories, fragile hardware experimental setups, and manual evaluation workflows with an instant, zero-setup, browser-based virtual environment.
-
-VLM natively unifies four heterogeneous engineering disciplines into a cohesive digital workspace:
-1. **Software & Algorithm Engineering:** Browser-based Python IDE powered by Monaco, executing in isolated sandboxes with automated pytest-compatible unit testing.
-2. **Digital Electronics & Logic Design:** Interactive circuit simulator (`circuit.sim`) supporting real-time signal propagation, truth table validation, interactive logic toggles, and live LED visualization.
-3. **Data Science & Scientific Computing:** Interactive Jupyter-compatible notebooks (`data.ipynb`) executing step-by-step data analysis workflows with inline cell execution and rich output rendering.
-4. **Engineering Mathematics & Virtual Physics/Electrical Benches:** Structured interactive worksheet labs (`answers.json`) featuring interactive virtual instruments (e.g., Simple Pendulum, DC Electrical Bench) and numerical algorithm visualizers (Newton-Raphson root finding, Simpson’s numerical integration).
+**Virtual Lab Manager (VLM)** is an institutional-grade, multi-disciplinary virtual laboratory operating system built for universities, polytechnics, and engineering colleges. It eliminates physical laboratory hardware bottlenecks, manual grading backlogs, and academic dishonesty by delivering zero-setup, in-browser execution across four fundamental engineering paradigms:
+1. **Software & Algorithm Engineering:** Real-time Python 3 sandbox with Monaco editor, standard library execution, and automated pytest-style assertion suites.
+2. **Digital Electronics & Logic Design:** Interactive logic circuit simulation (`circuit.sim`) with signal propagation, timing diagrams, interactive toggle switches, live LED indicators, and automated truth-table verification.
+3. **Data Science & Scientific Computing:** Interactive Jupyter-compatible notebooks (`data.ipynb`) supporting stepwise cell execution, stdout/stderr streams, and data tabular visualizations.
+4. **Engineering Mathematics & Virtual Physics/Electrical Benches:** Structured interactive worksheet labs (`answers.json`) featuring step-by-step numerical checks (Newton-Raphson, Simpson's Rule), apparatus data collection (Simple Pendulum, DC Bench), and dynamic least-squares scatter-plot regression.
 
 Underpinning these workspaces is a specialized, multi-tiered AI engine powered by **Gemini 3.5 & Gemma**:
 - **Socratic Lab Tutor:** A multi-turn, anti-spoiler cognitive assistant that provides progressive hints (conceptual nudge → edge-case focus → algorithmic logic) without ever leaking code fixes.
@@ -24,74 +23,75 @@ Underpinning these workspaces is a specialized, multi-tiered AI engine powered b
 ---
 
 ## 2. Problem Statement
-Higher education engineering programs globally, and across India’s 3,500+ technical institutions specifically, face systemic structural bottlenecks in lab-based education:
-1. **Physical Lab Inefficiencies & Hardware Deficits:** Physical labs are capital-intensive, hardware is frequently obsolete or broken (burned resistors, loose breadboard wires, faulty microcontrollers), and labs are constrained by strict physical scheduling (typically 2 hours/week).
-2. **Environment Configuration Fatigue:** Students spend 40% of lab time configuring compilers, dependencies, Python virtual environments, and path variables rather than mastering core computational thinking.
-3. **The "Copy-Paste / AI Spoon-Feeding" Crisis:** With the proliferation of LLMs, students paste boilerplate code directly into assignments without cognitive friction, eroding problem-solving abilities and rendering traditional homework assignments ungradable.
-4. **Faculty Grading Overload & Evaluation Lag:** Professors and teaching assistants spend 15–20 hours per week manually checking repetitive lab reports. Feedback loops take 2 to 3 weeks, by which point the pedagogical moment has passed.
-5. **Institutional Blindspots:** Department Heads have zero real-time visibility into student struggles until mid-term exam failures. High-friction concepts (e.g., pointer manipulation, binary tree recursion, duplicate keys) remain invisible bottlenecks across cohorts.
+Technical higher education globally, and specifically across India's 3,500+ engineering institutions, suffers from acute systemic laboratory challenges:
+1. **Hardware & Infrastructure Deficits:** Physical computer and electronics laboratories are capital-intensive. Hardware (breadboards, oscilloscopes, IC chips) is frequently burned or broken, and access is restricted to 2 hours per week per student.
+2. **Environment Configuration Fatigue:** Up to 40% of lab time is wasted resolving local compiler incompatibilities, environment variables, driver installations, and OS quirks rather than understanding algorithms.
+3. **The LLM "Copy-Paste" Crisis:** Unrestricted access to commercial generative AI leads students to paste raw code solutions without comprehension, causing widespread plagiarism and completely breaking traditional homework grading models.
+4. **Crushing Faculty Evaluation Workload:** Course instructors manually inspect thousands of physical and digital lab journals each semester. Grading turnaround takes 2 to 4 weeks, eliminating timely formative feedback.
+5. **Institutional Blindspots:** Department heads have no real-time data regarding student drop-off, conceptual bottlenecks, or accreditation compliance until end-semester examination failures occur.
 
 ---
 
 ## 3. Product Purpose
-The primary purpose of Virtual Lab Manager is to democratize, standardize, and accelerate technical education by providing:
-- **Instant Student Accessibility:** Zero-setup browser access to professional-grade engineering workspaces on any device, anywhere.
-- **Pedagogical Integrity through Socratic AI:** An AI tutor that guides students to discover solutions themselves, enforcing genuine cognitive effort.
-- **Instant Objective Assessment:** Real-time test assertion feedback combined with transparent rubric scorecards.
-- **Institutional Governance & Fairness:** Strict exam lockdown security, academic integrity audits, and automated faculty workload optimization.
-- **Data-Driven Curriculum Optimization:** Transforming granular student error logs into actionable institutional curriculum interventions.
+The core mission of Virtual Lab Manager is to democratize, standardize, and accelerate technical education by providing:
+- **Instant Equalized Access:** Zero-setup browser access to high-performance engineering workspaces on any client device (from mobile phones to entry-level laptops).
+- **Enforced Socratic Mastery:** Pedagogical AI guardrails ensuring students engage in genuine cognitive problem solving rather than passive answer retrieval.
+- **Instant Objective Assessment:** Real-time test-case validation combined with deterministic, transparent rubric grading.
+- **Academic Governance & Exam Security:** Built-in exam lockdown mode, proctoring telemetry, and Safe Exam Browser (SEB) support for high-stakes institutional examinations.
+- **Actionable Curriculum Telemetry:** Automated conversion of granular test execution failures into department-level curriculum interventions and accreditation-ready audit trails.
 
 ---
 
 ## 4. Target Audience
-VLM serves institutional technical education ecosystems comprising three core user tiers:
-1. **Undergraduate & Postgraduate Students:** Enrolled in Computer Science, Electrical Engineering, Electronics & Telecommunications, Information Technology, and Applied Sciences courses.
-2. **Course Instructors, Professors, & Lab Assistants:** Responsible for authoring practicals, supervising lab cohorts, grading submissions, and providing academic interventions.
-3. **Academic Administrators (Heads of Department, Deans, Directors):** Responsible for faculty workload allocation, curriculum pacing, university compliance, exam integrity, and student retention.
+VLM is designed for three distinct institutional user tiers within STEM and engineering colleges:
+1. **Undergraduate & Postgraduate Students:** Enrolled in Computer Science, Electrical Engineering, Electronics, Information Technology, and Applied Mathematics courses.
+2. **Course Instructors, Professors, & Lab Assistants:** Responsible for creating practicals, monitoring live lab sessions, evaluating subjective code quality, and conducting viva voce examinations.
+3. **Academic Administrators (Heads of Department, Deans, Academic Directors):** Responsible for faculty workload allocation, student retention, syllabus pacing, and accreditation (NBA / NAAC) compliance.
 
 ---
 
 ## 5. User Personas
 
-### Persona 1: The Struggling Student — Aarav Sharma (2nd Year B.Tech CSE)
-- **Context:** Enrolled in *CS201: Data Structures & Algorithms*. Accesses labs on a mid-range personal laptop or college lab desktop with intermittent connectivity.
-- **Pain Points:** Gets stuck on subtle edge cases (e.g., BST duplicate key insertion) and experiences debugging paralysis. When using ChatGPT, he gets full solutions that he doesn't understand and gets penalized for AI plagiarism.
-- **Goals:** Understand *why* his code fails without being given the answer; get immediate test feedback; know his expected grade before final submission; avoid losing marks on formatting nits.
-- **VLM Value:** Monaco-powered IDE with pytest checklists, auto-diff on assertion failure, and progressive Socratic hints that ask guiding questions.
+### Persona A: Aarav Sharma — 2nd Year CSE Student
+- **Profile:** 19 years old, enrolled in *CS201: Data Structures Lab*. Uses a modest 8GB RAM laptop with erratic internet connectivity.
+- **Frustrations:** Gets stuck on subtle edge cases (e.g., duplicate keys in Binary Search Trees) and suffers debugging paralysis. Afraid of asking professors basic questions. When using ChatGPT, he gets penalized because professors recognize generic AI code.
+- **Goals:** Understand *why* his logic fails; receive instant feedback on unit tests; know his grades immediately before final submission; retain working progress across devices.
+- **VLM Solution:** Dark-themed Monaco IDE with instant pytest test runner, failure diff overlays, and progressive Socratic hints that guide without spoiling.
 
-### Persona 2: The Overworked Faculty Member — Prof. Meera Kulkarni (Associate Professor, Dept. of CSE)
-- **Context:** Teaches two theory courses and three practical lab sections (180+ total students). Supervises 10 mandatory practicals per semester.
-- **Pain Points:** Drowns in 1,800+ lab submissions each semester. Manually checking outputs on student screens during lab hours leaves no time for individualized mentoring. Suspects widespread code copying but lacks objective evidence.
-- **Goals:** Instant automated grading against standardized rubrics; clear visibility into who copied code vs. who struggled honestly; live exam invigilation with one-click lockdown unlock; ability to rapidly generate customized test cases.
-- **VLM Value:** Automated rubric scorecards with manual score overrides, Live Lab Monitor with lock-reason auditing, and automated teaching material generators.
+### Persona B: Prof. Meera Kulkarni — Associate Professor & Lab In-Charge
+- **Profile:** 38 years old, manages 3 lab sections comprising 180+ enrolled students. Evaluates 10 mandatory practicals per semester per student (1,800+ total submissions).
+- **Frustrations:** Spends entire weekends grading repetitive code files. Spends lab hours policing tab switching and mobile phone usage instead of teaching. Has no objective proof of code sharing or AI generation.
+- **Goals:** Automated grading against transparent criteria; instant visibility into who is copying vs. who is genuinely struggling; one-click lockdown exam invigilation with easy unlock controls.
+- **VLM Solution:** Automated rubric grading with manual override, Live Lab Monitor with lock-reason auditing, and automated teaching/viva material generators.
 
-### Persona 3: The Governance-Focused HOD — Dr. Rajesh Deshpande (Head of Department, CSE)
-- **Context:** Oversees 24 faculty members, 800+ students, and 18 lab courses. Reports semester compliance and accreditation metrics (NBA / NAAC) to university leadership.
-- **Pain Points:** Discovers that students are failing a subject only after end-semester exams; has no visibility into whether practicals are completed on schedule; handles disputes over subjective grading; manually compiles accreditation compliance spreadsheets.
-- **Goals:** Real-time dashboard showing department lab completion %; automated early-warning identification of at-risk students; clear curriculum difficulty heatmaps; one-click export of compliance reports.
-- **VLM Value:** Executive KPI dashboards, automated weekly AI briefings, conversational natural language queries on department telemetry, and single-click CSV compliance audits.
+### Persona C: Dr. Rajesh Deshpande — Head of Department (HOD)
+- **Profile:** 52 years old, oversees 24 faculty members, 800+ students, and 18 departmental lab courses. Prepares periodic compliance dossiers for NBA/NAAC accreditation.
+- **Frustrations:** Learns about student academic failures only after semester results are published; lacks visibility into whether faculty are keeping up with grading; manually collects spreadsheets from faculty for compliance audits.
+- **Goals:** High-level department overview; automated identification of at-risk students before they fail; clear curriculum difficulty heatmaps; one-click export of compliance reports.
+- **VLM Solution:** Executive HOD dashboard, conversational "Ask AI" analytics assistant, weekly department briefings, and single-click compliance CSV export.
 
 ---
 
-## 6. Core Use Cases (P0)
+## 6. Core Use Cases (P0 — Essential Foundation)
 
-### UC-101: Student Lab Execution & Self-Correction
+### UC-101: Interactive Code Lab Execution & Real-Time Unit Testing
 - **Target User:** Student
-- **User Problem:** Cannot tell whether code meets assignment criteria prior to grading.
-- **Starting Point:** Student Dashboard → Course → Select Lab.
+- **User Problem:** Inability to know if code works correctly before submission.
+- **Starting Point:** Student Dashboard → Course Page → Select Practical.
 - **Workflow:**
-  1. Student reads lab objectives, constraints, and visible test specifications.
-  2. Types code into Monaco editor or adjusts logic in interactive circuit simulator.
+  1. Student reviews lab objectives, constraints, and starter files.
+  2. Edits `main.py` in Monaco editor.
   3. Clicks **Run Tests (`⌘↵` / `Ctrl+Enter`)**.
-  4. Backend sandbox executes code against test assertions in < 800ms.
-  5. UI displays pytest-style pass/fail terminal with auto-expanded expected vs. actual diffs.
-- **Expected Output:** Instant visual status pill (`4/5 tests passing`) and actionable error diagnostics.
-- **Key Dependencies:** Sandbox Execution Engine, Monaco Editor, Pytest Adapter.
+  4. Sandbox executes code against pytest test suite in <800ms.
+  5. UI updates header status pill (`4/5 tests passing`) and displays terminal breakdown with expected vs. actual diffs.
+- **Expected Output:** Color-coded test report, clear error traceback, and instant status pill update.
+- **Key Dependencies:** Sandbox Runner, Monaco Editor, Pytest Harness.
+- **Priority:** P0
 
-### UC-102: Socratic AI Lab Tutoring
+### UC-102: Multi-Turn Socratic AI Tutoring (Anti-Spoiler Guardrails)
 - **Target User:** Student
-- **User Problem:** Student is stuck on a failing test but wants guidance, not a spoon-fed solution.
-- **Starting Point:** Lab Workspace → Right Drawer → "Ask Tutor" or "Hint" button.
+- **User Problem:** Debugging paralysis when unit tests fail.
+- **Starting Point:** Lab Workspace → Right Drawer → "Ask Tutor" or "Hint".
 - **Workflow:**
   1. System checks current test failure context and current code snapshot.
   2. Level 1 Hint delivers a conceptual nudge explaining the underlying CS theory.
@@ -100,35 +100,39 @@ VLM serves institutional technical education ecosystems comprising three core us
   5. If student passes all visible tests, Tutor poses a Concept-Check verification question.
 - **Expected Output:** Multi-turn dialogue with zero copy-pasteable answers and strict prompt injection guards.
 - **Key Dependencies:** Gemini Socratic Prompt Engine, Tutor Guard, Anti-Canary Leak Detection.
+- **Priority:** P0
 
-### UC-103: Formal Lab Submission & Rubric Evaluation
-- **Target User:** Student
-- **User Problem:** Uncertainty over how qualitative and quantitative criteria are weighed.
-- **Starting Point:** Lab Workspace Header → Primary CTA: **Submit**.
+### UC-103: Automated Rubric Evaluation & Scorecard Generation
+- **Target User:** Student & Faculty
+- **User Problem:** Subjective grading, slow feedback cycles, lack of transparency.
+- **Starting Point:** Lab Workspace Header → **Submit** Button.
 - **Workflow:**
-  1. Student clicks Submit. System validates that at least one test run was attempted.
-  2. Dialog warns student of hidden test execution and unchangeable submission state.
-  3. Final code submitted to Rubric Grader: runs visible + hidden tests, inspects structure.
-  4. Scorecard modal displays final score ring (e.g. `9.5/10.0`), rubric criteria breakdown, and encouraging feedback summary.
+  1. Student confirms submission via dialog.
+  2. Backend runs full test suite (including hidden edge-case tests).
+  3. AI Evaluator grades submission against instructor's rubric criteria (0–10 scale in 0.5 steps).
+  4. Academic integrity engine computes AI style score, keystroke ratio, and copy-paste flags.
+  5. Scorecard modal displays final score, criteria breakdown, and actionable feedback.
 - **Expected Output:** Persistent `SubmissionRecord` with permanent timestamp and rubric breakdown.
 - **Key Dependencies:** Rubric Grader Engine, Hidden Test Runner.
+- **Priority:** P0
 
-### UC-104: Faculty Practical Authoring & Test Generation
+### UC-104: Practical Authoring with AI Test Generation
 - **Target User:** Faculty
-- **User Problem:** Writing starter files, solution implementations, and unit test suites takes hours.
+- **User Problem:** Creating robust unit tests, starter templates, and rubrics takes hours.
 - **Starting Point:** Faculty Dashboard → **+ New Practical**.
 - **Workflow:**
-  1. Instructor selects course, lab type (coding/circuit/notebook/worksheet), title, and max score.
-  2. Uses built-in templates or enters a topic prompt into **AI Test Generator**.
-  3. AI generates Python assert statements with boundary conditions and automatically designates 2 hidden test cases.
-  4. Instructor tests solution against authoring sandbox using **Validate**.
-  5. Sets lockdown mode (`Off`, `Strict Exam Mode`, or `Safe Exam Browser`) and clicks **Publish**.
-- **Expected Output:** Live published practical enrolled to all cohort students.
-- **Key Dependencies:** AI Testgen Service, Validation Sandbox, Course Registry.
+  1. Faculty specifies title, course, lab type (coding/circuit/notebook/worksheet), and deadline.
+  2. Enters problem topic and clicks **Generate Tests**.
+  3. AI produces 6–8 Python assertions including 2 hidden edge-case tests.
+  4. Faculty tests solution against authoring sandbox using **Validate**.
+  5. Configures lockdown mode and clicks **Publish**.
+- **Expected Output:** Published practical live for all enrolled students.
+- **Key Dependencies:** AI Testgen Service, Authoring Sandbox.
+- **Priority:** P0
 
-### UC-105: Live Lab Exam Lockdown & Remote Proctor Invigilation
+### UC-105: Live Lab Exam Lockdown & Remote Invigilation
 - **Target User:** Faculty & Student
-- **User Problem:** Preventing digital cheating, unauthorized collaboration, and tab switching during exams.
+- **User Problem:** Digital cheating, tab switching, and unauthorized collaboration during exams.
 - **Starting Point:** Student opens lockdown practical; Faculty opens Live Lab Monitor.
 - **Workflow:**
   1. Student encounters fullscreen **Exam Gate**. Must acknowledge exam rules.
@@ -139,272 +143,317 @@ VLM serves institutional technical education ecosystems comprising three core us
   6. Student clicks **Resume Exam** to re-enter fullscreen workspace.
 - **Expected Output:** Real-time synchronized exam state with zero client-side bypasses.
 - **Key Dependencies:** Exam State Machine, WebSocket / Polling Heartbeat, Proctor Telemetry.
+- **Priority:** P0
 
 ---
 
-## 7. Secondary Use Cases (P1)
+## 7. Secondary Use Cases (P1 — Value & Efficiency Enhancers)
 
-### UC-201: Faculty Manual Score & Feedback Override
+### UC-201: Manual Faculty Grade & Feedback Override
 - **Target User:** Faculty
-- **User Problem:** AI rubric assigned 8/10, but instructor wants to reward an exceptionally novel algorithm or penalize formatting.
-- **Workflow:** Faculty opens submission detail view → views AI rubric breakdown and code diff → types manual score and instructor comment → clicks **Save Review**.
+- **User Problem:** Automated scoring misses unique student design elegance or requires discretionary adjustments.
+- **Starting Point:** Faculty Dashboard → Submissions Queue → Select Submission.
+- **Workflow:** Faculty reviews test assertion results, AI rubric remarks, and student code; inputs manual score override and comment; saves review.
+- **Priority:** P1
 
 ### UC-202: Academic Integrity Audit Inspection
-- **Target User:** Faculty / HOD
-- **User Problem:** Verify whether a student's high score was achieved honestly or through external AI paste.
-- **Workflow:** Review Submission → click **Integrity Badge** → view typing cadence (burst characters per second), baseline file divergence, large insertion diffs, and AI syntax style indicators.
+- **Target User:** Faculty & HOD
+- **User Problem:** Identifying whether high scores were achieved via external AI generation or paste dumps.
+- **Starting Point:** Submission Review → Integrity Badge.
+- **Workflow:** Displays typing burst velocity (characters/sec), ratio of typed vs. inserted code, focus lost events, and AI styling hallmarks.
+- **Priority:** P1
 
-### UC-203: Interactive Circuit Simulation & Truth Table Verification
-- **Target User:** Student (Electronics / CS)
-- **User Problem:** Breadboarding logic gates physically is error-prone and tedious.
-- **Workflow:** Student opens `circuit.sim` → edits netlist declarations → clicks **Simulate** → toggles live input switches → observes LED output states and interactive timing diagrams.
+### UC-203: Digital Logic Circuit Simulation & Timing Analysis
+- **Target User:** Student (EE / ECE)
+- **User Problem:** Breadboard hardware wiring is tedious and hard to debug.
+- **Starting Point:** Lab Workspace with `circuit.sim`.
+- **Workflow:** Student edits logic netlist; clicks **Simulate**; interacts with live input switches; observes real-time LED states and clock timing diagrams.
+- **Priority:** P1
 
-### UC-204: Worksheet Virtual Instrument & Curve Fitting
-- **Target User:** Student (Physics / Electrical)
-- **User Problem:** Recording manual instrument readings into physical journals.
-- **Workflow:** Student runs Simple Pendulum or DC Bench virtual apparatus → takes measurements recorded directly into read-only observation table columns → inputs calculations into step cells → UI renders real-time scatter graph with least-squares linear regression fit.
+### UC-204: Worksheet Apparatus Simulation & Regression Plotting
+- **Target User:** Student (Physics / Maths)
+- **User Problem:** Physical lab equipment errors and manual graph plotting mistakes.
+- **Starting Point:** Worksheet Practical (Pendulum / DC Bench).
+- **Workflow:** Student operates virtual instrument apparatus; readings populate observation table; student inputs step calculations; UI computes least-squares regression line.
+- **Priority:** P1
 
 ---
 
-## 8. Advanced Use Cases (P2)
+## 8. Advanced Use Cases (P2 — Differentiation & Institutional Scale)
 
 ### UC-301: HOD Conversational Department Analytics ("Ask AI")
 - **Target User:** HOD
-- **User Problem:** Finding specific cross-course data (e.g., "Which faculty member has the longest grading turnaround this month?") requires complex SQL queries.
-- **Workflow:** HOD Dashboard → **Ask** tab → types question in plain natural language → Gemini Analyst processes sanitized JSON telemetry snapshot → returns direct answers, highlighted bullet insights, and formatted comparison tables.
+- **User Problem:** Extracting cross-cohort insights requires complex database queries.
+- **Starting Point:** HOD Dashboard → **Ask** Tab.
+- **Workflow:** HOD asks natural language questions (e.g., "Which practical had the highest failure rate this week?"); Gemini Analyst answers using structured department telemetry snapshots with highlights and tables.
+- **Priority:** P2
 
-### UC-302: Institutional Pacing & Bottleneck Heatmap Analysis
-- **Target User:** HOD / Faculty
-- **User Problem:** Identifying curriculum bottlenecks before students fail end-semester exams.
-- **Workflow:** HOD/Faculty opens **Intelligence** tab → inspects **Learning Difficulty Heatmap** sorted by failure rate and affected students → identifies that `test_duplicate_keys` in BST has a 72% failure rate → schedules a departmental remedial session.
+### UC-302: Institutional Pacing & Curriculum Bottleneck Heatmap
+- **Target User:** HOD & Faculty
+- **User Problem:** Identifying syllabus failure points only after end-semester exams.
+- **Starting Point:** Faculty/HOD Dashboard → **Intelligence** Tab.
+- **Workflow:** System aggregates test execution failures across all runs; visualizes top failing assertions, fail rates, and affected student counts.
+- **Priority:** P2
 
-### UC-303: Deterministic At-Risk Student Identification & Follow-up
-- **Target User:** Faculty / HOD
-- **User Problem:** Identifying students disengaging before they drop out.
-- **Workflow:** Intelligence Tab → **At-Risk Students** → view students ranked by deterministic risk score (low completion %, low score, overdue count, repeated stagnant attempts) → click **Reasons** → review specific failure factors and recommended intervention steps.
+### UC-303: Deterministic At-Risk Student Identification
+- **Target User:** HOD & Faculty
+- **User Problem:** Students slipping behind unnoticed in large cohorts.
+- **Starting Point:** Intelligence Tab → **At-Risk Students**.
+- **Workflow:** Deterministic scoring engine calculates risk (low completion + overdue labs + low scores + stagnant attempts); surfaces actionable intervention recommendations.
+- **Priority:** P2
 
 ---
 
 ## 9. User Journey Maps
 
-### Journey 1: Student End-to-End Lab Experience
-```mermaid
-journey
-    title Student Journey: From Assignment to Socratic Mastery
-    section Discovery
-      Log into VLM: 5: Student
-      View Dashboard & Pending Labs: 4: Student
-      Select Lab 4 (BST): 5: Student
-    section Execution
-      Pass Start / Exam Gate: 4: Student
-      Inspect Instructions & Starter Code: 5: Student
-      Write Code in Monaco Editor: 4: Student
-      Run Tests (Pytest Engine): 3: Student
-    section Socratic Assistance
-      Encounter Assertion Failure: 2: Student
-      Request Level 1 Hint (Concept): 4: Student
-      Apply Logic Fix & Re-run Tests: 4: Student
-      Pass All Visible Tests: 5: Student
-      Answer Concept-Check Verification: 4: Student
-    section Submission
-      Confirm Final Submission: 5: Student
-      View Instant Rubric Scorecard: 5: Student
+### 9.1 Student Journey: Completing an Algorithm Practical
+```
+[Login Screen] ──(1-Click Demo / Email)──> [Student Dashboard]
+                                                    │
+                                         (Select Due Practical)
+                                                    ▼
+                                           [Exam / Start Gate]
+                                                    │
+                                         (Acknowledge Rules)
+                                                    ▼
+                                           [IDE Lab Workspace]
+                                                    │
+                              ┌─────────────────────┴─────────────────────┐
+                              ▼                                           ▼
+                       [Monaco Editor]                             [Pytest Terminal]
+                     (Write Implementation)                       (Run Tests: ⌘+Enter)
+                              │                                           │
+                              └─────────────────────┬─────────────────────┘
+                                                    ▼
+                                            [Test Failure?]
+                                             ├── Yes ──> [Socratic Tutor Drawer] (Hints 1-3)
+                                             └── No  ──> [Concept Check Question]
+                                                                  │
+                                                          (Click Submit)
+                                                                  ▼
+                                                      [Confirm Submit Modal]
+                                                                  ▼
+                                                       [Rubric Scorecard Modal]
 ```
 
-### Journey 2: Faculty Lab Administration & Evaluation
-```mermaid
-journey
-    title Faculty Journey: Authoring, Supervision & Evaluation
-    section Preparation
-      Create New Practical: 4: Faculty
-      Generate AI Test Cases: 5: Faculty
-      Publish with Exam Lockdown: 5: Faculty
-    section Lab Supervision
-      Monitor Live Lab Session: 5: Faculty
-      Receive Locked Exam Alert: 3: Faculty
-      Audit Violation Reason: 4: Faculty
-      Unlock Student Session: 5: Faculty
-    section Grading & Insights
-      Review Submissions Queue: 4: Faculty
-      Audit Integrity Score & Paste Flags: 5: Faculty
-      Override Rubric Score with Note: 4: Faculty
-      Inspect Course Difficulty Heatmap: 5: Faculty
+### 9.2 Faculty Journey: Authoring, Supervision & Evaluation
+```
+[Faculty Dashboard] ──> [+ New Practical] ──> [AI Test Case Generator] ──> [Validate in Sandbox]
+         │                                                                          │
+         │                                                                   (Click Publish)
+         │                                                                          ▼
+         ├──> [Live Lab Monitor] <──(Real-Time Heartbeat)── [Active Student Exam Sessions]
+         │         │
+         │   (Detect Violation) ──> [Student Locked] ──> [Mentor Review & Unlock]
+         │
+         └──> [Submissions Tab] ──> [Select Student] ──> [Inspect Integrity & Rubric] ──> [Save Review]
 ```
 
 ---
 
-## 10. Information Architecture & Navigation
-
-The platform enforces strict role-based separation:
+## 10. Information Architecture
+The platform enforces role-based separation:
 - A user session represents exactly **one person in one role** (no role-switching dropdowns inside active views).
 - Navigating between views adheres to zero-layout-shift principles with consistent top navigation bars.
 
 ```
-Virtual Lab Manager
-├── / (Public Auth & Landing)
-│   ├── Login Form (Email + Password)
-│   └── One-Click Demo Role Cards (Student / Faculty / HOD)
+Virtual Lab Manager Root
+├── / (Public Authentication Gateway)
+│   ├── User Login Form (Email + Password)
+│   └── 1-Click Role Access Cards (Student / Faculty / HOD)
 │
-├── /student (Student Workspace)
-│   ├── /student (Dashboard: My Labs, Course Progress, To Do / Completed)
-│   ├── /student/courses/[id] (Filtered Course Lab View)
-│   └── /student/labs/[id] (Zero-Distraction IDE Workspace)
-│       ├── Header (Status Pill, Proctor Chip, Timer/Pause, Run/Hint/Submit)
-│       ├── Left Pane (Instructions / Multi-Tab Code / Notebook / Worksheet)
-│       └── Right Pane (Test Runner Terminal, Socratic Hint Stepper, Rubric Panel)
+├── /student (Student Portal)
+│   ├── Dashboard (Assigned Labs, Course Progress Cards, To-Do / Completed Views)
+│   ├── /student/courses/[id] (Single Course Lab Roster)
+│   └── /student/labs/[id] (Full-Screen Distraction-Free IDE Workspace)
+│       ├── Fixed Header (Breadcrumb, Status Pill, Proctor Chip, Timer, Action CTAs)
+│       ├── Left Split Pane (Instructions, Monaco Code Editor, Notebook, Worksheet)
+│       └── Right Split Pane (Test Runner Terminal, Socratic Hint Stepper, Rubric Panel)
 │
-├── /faculty (Faculty Command Center)
-│   ├── /faculty (Dashboard Tabs: Practicals, Submissions, Insights, Intelligence, Courses)
-│   ├── /faculty/practicals/new (Authoring Wizard & AI Test Generator)
-│   ├── /faculty/practicals/[id]/edit (Practical Configuration & Lockdown Settings)
-│   ├── /faculty/practicals/[id]/submissions (Cohort Submissions Table)
-│   ├── /faculty/practicals/[id]/monitor (Live Lab Exam Monitor & Invigilation)
-│   ├── /faculty/submissions/[id] (Submission Evaluation, Diff & Proctor Timeline)
+├── /faculty (Faculty Portal)
+│   ├── Dashboard (Tabs: Practicals, Submissions, Where Students Struggle, Intelligence, Courses)
+│   ├── /faculty/practicals/new (Practical Creation Wizard & AI Test Generator)
+│   ├── /faculty/practicals/[id]/edit (Metadata, Files, Tests & Lockdown Settings)
+│   ├── /faculty/practicals/[id]/submissions (Cohort Submission Table)
+│   ├── /faculty/practicals/[id]/monitor (Live Lab Exam Monitor & Real-Time Invigilation)
+│   ├── /faculty/submissions/[id] (Detailed Submission Review, Diff Viewer & Proctor Timeline)
 │   └── /faculty/teaching (AI Teaching Material & Viva Question Generator)
 │
-└── /hod (Department Executive Suite)
-    └── /hod (Executive Tabs: Overview, AI Insights, Intelligence, Courses & Faculty, Compliance, Ask AI)
+└── /hod (Department Executive Portal)
+    └── Dashboard (Tabs: Overview KPIs, AI Insights, Intelligence, Courses & Faculty, Compliance, Ask AI)
 ```
 
 ---
 
-## 11. Sitemap & Navigation Structure
-
-### Global Header Specifications
-- **Height:** Exactly `56px` (`h-14`).
-- **Background:** `bg-slate-950` with bottom border `border-slate-800`.
-- **Left Elements:** Monospace Brand Mark (`VLM` / `Virtual Lab Manager`), Active Role Badge (`Student` / `Faculty` / `HOD`).
-- **Center Elements (Faculty & HOD):** Breadcrumb context (`CS201 › Lab 4: Binary Search Trees`).
-- **Right Elements:**
-  - `AlertsBell` (Faculty/HOD only: polls `/faculty/alerts` every 10s; pulsing red count pill).
-  - User Identity display (`Prof. Meera Kulkarni`).
-  - **Sign Out** button (clears session and returns to `/`).
-
----
-
-## 12. Recommended Design Direction: "Developer-First Academic SaaS"
-
-### Why This Visual Direction?
-Traditional learning management systems (e.g., Moodle, Blackboard) fail because they look like bureaucratic administrative databases. Conversely, generic modern SaaS templates look like marketing dashboards with frivolous decorative cards and empty whitespace.
-
-VLM implements a deliberate **Dual-Mode Architectural Aesthetic**:
-1. **The Student Workspace is Dark (`#0a0b0f` canvas):** Modeled after high-focus developer environments like **Linear**, **Vercel**, and **Replit**. Dark canvas minimizes ocular strain during 2-hour lab sessions, treats code and terminal outputs as first-class citizens, and maximizes editor real estate.
-2. **The Faculty & HOD Dashboards are Light (`#f8fafc` slate-50):** Modeled after high-clarity data tools like **Stripe Dashboard** and **Raycast for Teams**. Crisp white cards, razor-thin hairlines, and tabular metrics allow educators to rapidly scan tables with hundreds of student records without visual fatigue.
+## 11. Sitemap
+```
+/
+├── /student
+│   ├── /student/courses/[id]
+│   └── /student/labs/[id]
+├── /faculty
+│   ├── /faculty/practicals/new
+│   ├── /faculty/practicals/[id]/edit
+│   ├── /faculty/practicals/[id]/submissions
+│   ├── /faculty/practicals/[id]/monitor
+│   ├── /faculty/submissions/[id]
+│   └── /faculty/teaching
+└── /hod
+```
 
 ---
 
-## 13. Brand Identity & Visual Language
-- **Brand Voice:** Objective, technical, academic, precise, encouraging.
-- **Tone:** Zero marketing fluff. Sentence-case headers. Numerical precision (`4/5 tests passed`, never "Almost there!").
-- **Visual Stance:** Zero decorative illustrations, zero floating 3D icons, zero unnecessary animations. Every pixel communicates functional state.
+## 12. Navigation Structure
+- **Persistent Header:** 56px (`h-14`) global header with dark slate background (`bg-slate-950`).
+- **Student Navigation:** Contextual breadcrumbs (`CS201 › Lab 4: Binary Search Trees`). When exam lockdown is active, navigation links are disabled to prevent accidental abandonment.
+- **Faculty & HOD Navigation:** Underline tab bar (`UnderlineTabs`) with accessible keyboard arrow navigation, active indicator underline, and count badges.
+- **Global Actions:** Right-aligned Alerts Bell (polls `/faculty/alerts` every 10s with live badge count), User Name display, and Sign Out button.
 
 ---
 
-## 14. Color System
+## 13. Recommended Design Direction: "Developer-First Academic SaaS"
 
-### Workspace Dark Palette (Student IDE)
-| Token | Hex Value | Role & Usage |
-|:---|:---|:---|
-| `canvas` | `#0a0b0f` | Main IDE root canvas, terminal background |
-| `surface-1` | `#0f1117` | Secondary panes, Monaco editor gutter & background |
-| `surface-2` | `#151821` | Active tab headers, cards, popover containers |
-| `surface-3` | `#1c202b` | Segmented controls, input fields, hover states |
-| `line` | `rgba(255,255,255,0.06)` | 1px hairline structural borders |
-| `line-strong`| `rgba(255,255,255,0.12)` | Active control borders, divider rules |
-| `fg` | `#e6e8ee` | Primary readable prose, code text |
-| `fg-muted` | `#9aa3b2` | Secondary metadata, labels, status text |
-| `fg-faint` | `#6b7280` | Placeholder text, line numbers, disabled states |
-| `brand` | `#6366f1` | Primary CTA buttons, active tab indicators, focus rings |
-
-### Dashboard Light Palette (Faculty & HOD)
-| Token | Hex Value | Role & Usage |
-|:---|:---|:---|
-| `bg-page` | `#f8fafc` (`slate-50`) | Full page background |
-| `bg-card` | `#ffffff` (`white`) | Container cards, modal panels, table wrappers |
-| `border-card`| `#e2e8f0` (`slate-200`)| 1px crisp structural card borders |
-| `text-primary`| `#0f172a` (`slate-900`)| Headings, student names, primary scores |
-| `text-secondary`| `#475569` (`slate-600`)| Descriptive labels, secondary metrics |
-| `text-muted` | `#64748b` (`slate-500`)| Table column headers, timestamps, meta hints |
-
-### Semantic State System (Shared)
-| Status | Dark Pill Class | Light Badge Class | Usage |
-|:---|:---|:---|:---|
-| **Pass / Success** | `bg-emerald-500/10 text-emerald-300 ring-emerald-500/20` | `bg-emerald-50 text-emerald-700 ring-emerald-600/20` | Tests passing, compliant, unlocked |
-| **Warning / Pacing**| `bg-amber-500/10 text-amber-300 ring-amber-500/20` | `bg-amber-50 text-amber-700 ring-amber-600/20` | Pacing gap, medium integrity risk, due soon |
-| **Fail / Critical** | `bg-rose-500/10 text-rose-300 ring-rose-500/20` | `bg-rose-50 text-rose-700 ring-rose-600/20` | Failed test assertion, exam locked, high risk |
-| **AI / Socratic** | `bg-purple-500/10 text-purple-300 ring-purple-500/20` | `bg-purple-50 text-purple-700 ring-purple-600/20` | Socratic tutor turn, AI grading summary |
-| **Neutral / Todo** | `bg-white/5 text-slate-400 ring-white/10` | `bg-slate-100 text-slate-700 ring-slate-200` | Unattempted practical, draft status |
+### Visual Philosophy
+1. **The Student Workspace is Dark (`#0a0b0f` canvas):** Inspired by **Linear**, **Vercel**, and **Replit**. Code is the hero element. Low eye strain during 2-hour lab sessions.
+2. **The Faculty & HOD Dashboards are Light (`#f8fafc` slate-50):** Inspired by **Stripe Dashboard** and **Raycast for Teams**. High scanning velocity, clear tabular data, zero visual clutter.
+3. **No Decorative Fluff:** No floating 3D icons, no unnecessary gradient blobs, no marketing slogans. Every pixel serves an educational or operational purpose.
 
 ---
 
-## 15. Typography System
-- **UI Font Family:** `Inter`, `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`.
-- **Code & Numeric Font Family:** `JetBrains Mono`, `ui-monospace, SFMono-Regular, Menlo, monospace`. (Font ligatures enabled for `!=`, `==`, `->`, `<=`).
-
-### Hierarchy & Scale
-| Level | Font Size | Line Height | Weight | Font Class | Usage |
-|:---|:---|:---|:---|:---|:---|
-| **Display Score**| `30px` (`1.875rem`) | `36px` | `700 Bold` | `font-mono tabular-nums` | Scorecard modal rings, big KPI metrics |
-| **Page Title** | `24px` (`1.5rem`) | `32px` | `600 SemiBold` | `font-sans` | Top level page headers (`My Labs`, `Faculty Dashboard`) |
-| **Section Title**| `18px` (`1.125rem`) | `28px` | `600 SemiBold` | `font-sans` | Card headers, modal headings |
-| **Body Regular** | `14px` (`0.875rem`) | `20px` | `400 Regular` | `font-sans` | Standard instructional prose, descriptions |
-| **Body Medium** | `14px` (`0.875rem`) | `20px` | `500 Medium` | `font-sans` | Table cell contents, button text |
-| **Caption / Meta**| `12px` (`0.75rem`) | `16px` | `500 Medium` | `font-sans` | Table column headers, timestamps, helper text |
-| **Code / Logs** | `13px` (`0.8125rem`)| `18px` | `400 Regular` | `font-mono` | Monaco editor buffer, terminal error tracebacks |
+## 14. Brand Identity
+- **Name:** Virtual Lab Manager (VLM)
+- **Wordmark:** Clean sans-serif wordmark paired with an indigo dot accent.
+- **Tone:** Objective, technical, academic, precise, encouraging.
+- **Copywriting Style:** Sentence-case headings. Numerical precision (`4/5 tests passed`, never "Almost there!").
 
 ---
 
-## 16. Spacing, Grid & Layout Systems
-- **Base Grid:** `4px` baseline (`0.25rem`).
-- **Component Padding Scale:**
-  - Micro buttons / pills: `px-2 py-1`
-  - Standard buttons / inputs: `px-3.5 py-2` (height: `36px`)
-  - Cards: `p-5` (`20px` interior padding)
-  - Layout gaps: `gap-4` (`16px`) on mobile, `gap-6` (`24px`) on desktop
-- **Max Container Width:** `max-w-7xl` (`1280px`) centered with `mx-auto px-4 sm:px-6 lg:px-8`.
-- **Workspace Bounds:** Exactly `100dvh` viewport lock with zero body scrollbar (`overflow-hidden`).
+## 15. Color System
+
+### 15.1 Dark Palette (Student IDE Workspace)
+- Canvas Background: `#0a0b0f` (`bg-canvas`)
+- Surface Level 1 (Panes, Gutter): `#0f1117` (`bg-surface-1`)
+- Surface Level 2 (Cards, Active Tabs): `#151821` (`bg-surface-2`)
+- Surface Level 3 (Inputs, Controls): `#1c202b` (`bg-surface-3`)
+- Hairline Border: `rgba(255, 255, 255, 0.06)` (`border-line`)
+- Active Control Border: `rgba(255, 255, 255, 0.12)` (`border-line-strong`)
+- Primary Text: `#e6e8ee` (`text-fg`)
+- Muted Metadata Text: `#9aa3b2` (`text-fg-muted`)
+- Faint Text & Line Numbers: `#6b7280` (`text-fg-faint`)
+- Brand Accent: `#6366f1` (`indigo-500`)
+
+### 15.2 Light Palette (Faculty & HOD Dashboards)
+- Page Background: `#f8fafc` (`slate-50`)
+- Card Surface: `#ffffff` (`white`)
+- Structural Border: `#e2e8f0` (`slate-200`)
+- Primary Text: `#0f172a` (`slate-900`)
+- Secondary Text: `#475569` (`slate-600`)
+- Muted Table Headers: `#64748b` (`slate-500`)
+
+### 15.3 Semantic Colors
+- **Pass / Success:** Emerald (`#10b981`) — dark: `bg-emerald-500/10 text-emerald-300 ring-emerald-500/20` | light: `bg-emerald-50 text-emerald-700 ring-emerald-600/20`
+- **Warning / Pacing Gap:** Amber (`#f59e0b`) — dark: `bg-amber-500/10 text-amber-300 ring-amber-500/20` | light: `bg-amber-50 text-amber-700 ring-amber-600/20`
+- **Error / Lockdown / High Risk:** Rose (`#f43f5e`) — dark: `bg-rose-500/10 text-rose-300 ring-rose-500/20` | light: `bg-rose-50 text-rose-700 ring-rose-600/20`
+- **AI / Socratic Nudge:** Purple (`#8b5cf6`) — dark: `bg-purple-500/10 text-purple-300 ring-purple-500/20` | light: `bg-purple-50 text-purple-700 ring-purple-600/20`
+- **Info / Neutral:** Slate (`#64748b`) — `bg-slate-100 text-slate-700 ring-slate-200`
 
 ---
 
-## 17. Component Design System Specification
+## 16. Typography System
+- **UI Font:** `Inter`, `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+- **Code & Numeric Font:** `JetBrains Mono`, `monospace` (ligatures enabled)
 
-### 17.1 Buttons (`<Button>`, `<LinkButton>`)
-- **Primary:** `bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-md shadow-sm`. Exactly one primary button per screen.
-- **Secondary:** `bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-md`.
-- **Ghost:** `hover:bg-slate-100 text-slate-600 rounded-md`.
-- **Destructive:** `bg-rose-600 hover:bg-rose-500 text-white rounded-md`.
-- **Loading State:** Disabled, text remains visible with `Loader2` spinner prepended.
-
-### 17.2 Cards & Containers (`<Card>`, `<CardHeader>`)
-- High-clarity white containers: `bg-white border border-slate-200 rounded-lg shadow-sm`.
-- Header rule: `CardHeader` includes title (`text-sm font-semibold text-slate-900`), optional subtitle, and right-aligned filter action slots.
-
-### 17.3 Data Tables
-- Header: `border-b border-slate-100 bg-slate-50/50 text-xs font-medium text-slate-500 uppercase tracking-wider`.
-- Row: `border-b border-slate-100 hover:bg-slate-50/60 transition-colors py-3`.
-- Numerical Alignment: All score, date, and count columns use `text-right font-mono tabular-nums`.
-
-### 17.4 Stat Tile (`<StatTile>`)
-- Structure: Subdued top label (`text-xs font-medium text-slate-500`), large numerical display (`text-2xl font-semibold text-slate-900 font-mono`), and bottom context label (`text-xs text-slate-400`).
-- Strict rule: No decorative background icons.
+### Typography Scale
+- Display Score: `30px` (`1.875rem`), Line Height: `36px`, Weight: `700`, `font-mono tabular-nums`
+- Page Title: `24px` (`1.5rem`), Line Height: `32px`, Weight: `600`, `font-sans`
+- Section Title: `18px` (`1.125rem`), Line Height: `28px`, Weight: `600`, `font-sans`
+- Body Regular: `14px` (`0.875rem`), Line Height: `20px`, Weight: `400`, `font-sans`
+- Body Medium: `14px` (`0.875rem`), Line Height: `20px`, Weight: `500`, `font-sans`
+- Table Header / Meta: `12px` (`0.75rem`), Line Height: `16px`, Weight: `500`, `font-sans`
+- Code / Terminal: `13px` (`0.8125rem`), Line Height: `18px`, Weight: `400`, `font-mono`
 
 ---
 
-## 18. Page-by-Page UI Blueprint & Specifications
+## 17. Spacing and Layout System
+- **Base Grid:** `4px` baseline unit.
+- **Scale:**
+  - Micro: `4px` (`0.25rem`), `8px` (`0.5rem`)
+  - Component Padding: `12px` (`0.75rem`), `16px` (`1rem`), `20px` (`1.25rem`)
+  - Section Spacing: `24px` (`1.5rem`), `32px` (`2rem`)
+- **Max Width:** `max-w-7xl` (`1280px`) centered on dashboards.
+- **Viewport Lock:** Student IDE locked to exactly `100dvh` with zero window scrollbar.
 
-### 18.1 Landing & Unified Authentication (`/`)
-- **Target User:** Student, Faculty, HOD.
-- **Purpose:** Secure institutional gateway and one-click demo login.
-- **Main Elements:**
-  - Dark ambient backdrop (`bg-slate-950`).
-  - Centered auth container (`max-w-md`) with glowing blur backdrops.
-  - One-Click Role Cards: Three distinct role cards for instant zero-password judging access.
-  - Standard Credentials Form: Institutional email and password input fields with inline validation.
+---
 
-#### Text Wireframe: Landing / Login
+## 18. Component Design System Specification
+
+### 18.1 Buttons
+- **Primary:** `h-9 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-md shadow-sm transition-colors`
+- **Secondary:** `h-9 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 text-sm font-medium border border-slate-300 rounded-md transition-colors`
+- **Ghost:** `h-9 px-3.5 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-sm font-medium rounded-md`
+- **Destructive:** `h-9 px-3.5 py-2 bg-rose-600 hover:bg-rose-500 text-white text-sm font-medium rounded-md`
+
+### 18.2 Cards & Panels
+- Dashboard Card: `rounded-lg border border-slate-200 bg-white shadow-sm p-5`
+- Dark IDE Pane: `rounded-none border-r border-line bg-surface-1`
+
+### 18.3 Tables
+- Container: `overflow-x-auto border border-slate-200 rounded-lg`
+- Header: `border-b border-slate-100 bg-slate-50/75 px-3 py-2.5 text-xs font-medium text-slate-500 uppercase tracking-wider`
+- Data Row: `border-b border-slate-100 hover:bg-slate-50/60 py-3 text-sm`
+- Numeric Cells: `text-right font-mono tabular-nums`
+
+### 18.4 Badges & Status Pills
+- Compact format: `inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ring-1 ring-inset`
+
+---
+
+## 19. Page-by-Page UI Specifications
+
+### 19.1 Landing & Login (`/`)
+- Purpose: Secure role-based entry point with 1-click evaluation access.
+- Target User: All roles.
+- Sections: Product banner, 1-Click Demo role access cards, Email/Password login form.
+- Primary CTA: "Sign In to Portal".
+- Responsive: Card centers on mobile; full background gradient coverage.
+
+### 19.2 Student Dashboard (`/student`)
+- Purpose: Overview of enrolled courses, lab deadlines, and completed grades.
+- Target User: Student.
+- Sections: Course tab filter, Stat tiles (completed/assigned, average score, hints used), Course cards grid, All practicals split view (To Do vs. Completed).
+- Primary CTA: "Start Lab" on next pending practical.
+
+### 19.3 Student IDE Workspace (`/student/labs/[id]`)
+- Purpose: Distraction-free, zero-setup execution and learning environment.
+- Target User: Student.
+- Layout:
+  - Header (56px): Breadcrumb, Test status pill, Proctor chip, Timer/Pause, Run Code, Run Tests, Ask Tutor, Submit.
+  - Left Pane (55%): Tab bar (Instructions, `main.py`, etc.), Monaco editor, Gemma status bar.
+  - Right Pane (45%): Test runner terminal (pytest output), Drawer tab (Socratic Tutor vs. Rubric Panel).
+
+### 19.4 Faculty Dashboard (`/faculty`)
+- Purpose: Assignment administration, grading queue, cohort intelligence.
+- Target User: Faculty.
+- Sections: Page header with "New Practical" CTA, Stat tiles, Underline tabs (`Practicals`, `Submissions`, `Where Students Struggle`, `Intelligence`, `Courses`), Submissions review table.
+
+### 19.5 Live Lab Exam Monitor (`/faculty/practicals/[id]/monitor`)
+- Purpose: Real-time exam supervision and invigilation.
+- Target User: Faculty.
+- Sections: Summary count tiles (Online, Active, Locked, Submitted), Live student roster table with lock status, violations count, and mentor **Unlock** action button.
+
+### 19.6 HOD Dashboard (`/hod`)
+- Purpose: Department governance, accreditation compliance, faculty workload distribution.
+- Target User: HOD.
+- Sections: Header with "Export Compliance CSV", Department KPI tiles, Underline tabs (`Overview`, `AI Insights`, `Intelligence`, `Courses & Faculty`, `Compliance`, `Ask AI`), 14-day activity chart, score distribution histogram.
+
+---
+
+## 20. Text-Based Wireframes
+
+### 20.1 Authentication & 1-Click Access (`/`)
 ```
 +-----------------------------------------------------------------------+
-|                             [VLM Logo]                                |
+|                             [VLM Mark]                                |
 |                        Virtual Lab Manager                            |
 |     Interactive Engineering Labs, Socratic AI & Rubric Evaluation     |
 +-----------------------------------------------------------------------+
@@ -422,60 +471,7 @@ VLM implements a deliberate **Dual-Mode Architectural Aesthetic**:
 +-----------------------------------------------------------------------+
 ```
 
----
-
-### 18.2 Student Dashboard (`/student`)
-- **Target User:** Student.
-- **Purpose:** Cohort overview, lab deadlines, progress tracking across courses.
-- **Header:** PageHeader with Roll Number badge, Course Tabs filter.
-- **KPI Tiles:** Labs completed (`X/Y`), Average score (`X/10.0`), Hints used.
-- **Main Sections:**
-  - Course Cards Grid: Visual progress rings per enrolled subject.
-  - All Labs Split Table: Two clean tabs — **To Do** (due dates highlighted with late warning) vs. **Completed** (final scores and feedback links).
-
-#### Text Wireframe: Student Dashboard
-```
-+-----------------------------------------------------------------------+
-| VLM  Virtual Lab Manager      [Alerts]   Aarav Sharma (CS21B042) [Out]|
-+-----------------------------------------------------------------------+
-| [All Courses] [CS201 Data Structures] [EE210 Digital Logic]          |
-|                                                                       |
-| My Labs  [Student Badge]                                              |
-| CS21B042 · 3 Enrolled Courses                                         |
-|                                                                       |
-| +-------------------+  +-------------------+  +--------------------+  |
-| | Labs Completed    |  | Average Score     |  | Hints Used         |  |
-| | 7 / 10 (70%)      |  | 8.8 / 10.0        |  | 14 Hints           |  |
-| +-------------------+  +-------------------+  +--------------------+  |
-|                                                                       |
-| ENROLLED COURSES                                                      |
-| +-------------------------------+   +-------------------------------+ |
-| | CS201 Data Structures Lab     |   | EE210 Digital Electronics Lab | |
-| | 4/5 Labs Done · Avg: 9.1/10   |   | 3/4 Labs Done · Avg: 8.4/10   | |
-| +-------------------------------+   +-------------------------------+ |
-|                                                                       |
-| ALL LAB PRACTICALS                                                    |
-| [To Do (3)]   [Completed (7)]                                         |
-| +-------------------------------------------------------------------+ |
-| | Lab 4: Binary Search Trees | Due in 2d | Exam Mode | [Start Lab]  | |
-| | Lab 5: Graph BFS Traversal | Due in 6d | Proctored | [Start Lab]  | |
-| +-------------------------------------------------------------------+ |
-+-----------------------------------------------------------------------+
-```
-
----
-
-### 18.3 Student Lab Workspace (`/student/labs/[id]`)
-- **Target User:** Student.
-- **Purpose:** Core execution IDE. Zero distractions, zero layout shift, maximum focus.
-- **Structure:**
-  - **Header (`56px`):** Back breadcrumb, Lab Title, Live Status Pill (`4/5 tests passing`), Proctor Status Chip, Timer/Pause (exam mode), Action CTAs: `Run Code`, `Run Tests (⌘↵)`, `Ask Tutor`, `Submit`.
-  - **Left Pane (55% width):** File tabs (`Instructions`, `main.py`, `circuit.sim`, `data.ipynb`, `worksheet`). Embedded Monaco Editor with JetBrains Mono font. Status bar at bottom showing Gemma lint diagnostics and runtime latency.
-  - **Right Pane (45% width):**
-    - Top: Pytest Terminal Output with colored assertions and visual diff on mismatch.
-    - Bottom: Tabbed Drawer with **Socratic AI Tutor** conversation and **Rubric Breakdown**.
-
-#### Text Wireframe: Student Lab Workspace
+### 20.2 Student IDE Lab Workspace (`/student/labs/[id]`)
 ```
 +-----------------------------------------------------------------------+
 | ← CS201 › Lab 4: BST   [● 4/5 Passing] [Shield: Proctored] [Submit]   |
@@ -496,19 +492,7 @@ VLM implements a deliberate **Dual-Mode Architectural Aesthetic**:
 +------------------------------------+----------------------------------+
 ```
 
----
-
-### 18.4 Faculty Dashboard & Command Center (`/faculty`)
-- **Target User:** Course Instructor.
-- **Purpose:** Manage practicals, review auto-graded submissions, inspect cohort intelligence.
-- **Navigation Tabs:** `Practicals`, `Submissions`, `Where Students Struggle`, `Intelligence`, `Courses`.
-- **Top Actions:** `+ New Practical`, `Generate Teaching Material`.
-- **Key Cards:**
-  - Workload KPI Tiles (Pending reviews, Oldest pending submission age).
-  - Submissions Queue with one-click **Review** links.
-  - Intelligence Module: Performance distribution, workload, completion bars, at-risk students, difficulty heatmap.
-
-#### Text Wireframe: Faculty Dashboard
+### 20.3 Faculty Command Center (`/faculty`)
 ```
 +-----------------------------------------------------------------------+
 | VLM  Virtual Lab Manager       [Alerts (2)]   Prof. Kulkarni    [Out] |
@@ -536,153 +520,154 @@ VLM implements a deliberate **Dual-Mode Architectural Aesthetic**:
 +-----------------------------------------------------------------------+
 ```
 
----
+### 20.4 Live Lab Exam Monitor (`/faculty/practicals/[id]/monitor`)
+```
++-----------------------------------------------------------------------+
+| ← CS201 › Lab 4 Exam Monitor                   [Lockdown: Strict Exam]|
++-----------------------------------------------------------------------+
+| Total: 48  |  Active: 44  |  Locked: 2  |  Submitted: 2               |
++-----------------------------------------------------------------------+
+| Student Name     | Roll No | Status | Violations | Time Away | Action |
++------------------+---------+--------+------------+-----------+--------+
+| Rohit Verma      | CS21B04 | LOCKED | 3 Paste    | 42s       |[Unlock]|
+| Ananya Sen       | CS21B19 | ACTIVE | 0          | 0s        | [Lock] |
+| Dev Patel        | CS21B28 | LOCKED | 1 Tab Blur | 15s       |[Unlock]|
++------------------+---------+--------+------------+-----------+--------+
+```
 
-### 18.5 Live Lab Exam Monitor (`/faculty/practicals/[id]/monitor`)
-- **Target User:** Faculty Invigilator.
-- **Purpose:** Real-time exam supervision, lockdown auditing, and mentor unlocks.
-- **KPI Status Tiles:** `Online (42)`, `Active (38)`, `Locked (2)`, `Submitted (4)`.
-- **Student Exam Table:**
-  - Student Name & Roll Number.
-  - Live Exam State (`Active`, `Locked`, `Paused`, `Submitted`).
-  - Lock Reason with timestamp (`Fullscreen exit`, `Tab blur`, `Devtools open`).
-  - Live Proctor Violations counter (Paste attempts, away time in ms).
-  - Action CTA: **Unlock** button with required mentor verification note.
-
----
-
-### 18.6 HOD Executive Suite (`/hod`)
-- **Target User:** Head of Department.
-- **Purpose:** Department governance, cross-faculty workload distribution, accreditation reporting.
-- **Tabs:** `Overview`, `AI Insights`, `Intelligence`, `Courses & Faculty`, `Compliance`, `Ask AI`.
-- **Key Modules:**
-  - Department Activity 14-day trend charts (Executions, Submissions, AI Hints).
-  - Faculty Workload Matrix with automated **"High load"** flags (>2x department average).
-  - Weekly Executive Briefing card generated automatically by Gemini.
-  - Conversational **Ask AI** terminal for direct natural language queries.
-  - One-Click **Export Compliance CSV** for NBA/NAAC auditing.
-
----
-
-## 19. Interaction Design & Micro-Interaction Guidelines
-
-### 19.1 Keyboard Shortcuts
-- `⌘ + Enter` / `Ctrl + Enter`: Trigger **Run Tests** in student workspace.
-- `⌘ + S` / `Ctrl + S`: Force immediate draft sync to server (overriding 2-second debounce).
-- `Escape`: Close modals, dismiss popovers, or cancel full-screen dialogs.
-
-### 19.2 Loading & Transition Principles
-- **No Layout Shift:** Every container, stat tile, and table column has an explicit pre-allocated width or minimum height.
-- **Skeleton Shimmers:** Skeletons match the exact geometric dimensions of the loaded content (`DarkSkeleton` in workspace, light skeleton on dashboards).
-- **Tab Transitions:** Instantaneous tab switching using zero-overhead state swaps (no sliding animations that delay user interaction).
-
----
-
-## 20. Responsive Design Guidelines
-
-| Breakpoint | Width Range | Layout Adaptation |
-|:---|:---|:---|
-| **Mobile (`sm`)** | `< 640px` | Single-column stack. Lab workspace shifts to segmented switch (`Editor` vs `Results/Terminal`). Top nav collapses brand text. |
-| **Tablet (`md`)** | `640px – 1023px` | Two-column dashboard grids. Table horizontal scrolling enabled with fixed sticky left column. |
-| **Desktop (`lg+`)** | `≥ 1024px` | Full dual-pane fixed-fraction workspace (55% Editor, 45% Results). 4-column stat tile grids. |
+### 20.5 HOD Executive Suite (`/hod`)
+```
++-----------------------------------------------------------------------+
+| VLM  Virtual Lab Manager          [Export Compliance CSV]  Dr. Deshpande|
++-----------------------------------------------------------------------+
+| Department of Computer Science & Engineering                          |
+| 24 Faculty · 812 Students · 18 Lab Courses                            |
+|                                                                       |
+| [Overview] [AI Insights] [Intelligence] [Courses] [Compliance] [Ask]  |
+|                                                                       |
+| +-------------------+  +-------------------+  +--------------------+  |
+| | Overall Completion|  | Dept Average Score|  | At-Risk Students   |  |
+| | 78.4%             |  | 8.2 / 10.0        |  | 14 Students        |  |
+| +-------------------+  +-------------------+  +--------------------+  |
+|                                                                       |
+| FACULTY WORKLOAD DISTRIBUTION                                         |
+| +-------------------------------------------------------------------+ |
+| | Faculty Name      | Courses | Practicals | Pending | Avg Turnaround| |
+| | Prof. M. Kulkarni | 2       | 6          | 8       | 1.2d          | |
+| | Prof. S. Sharma   | 3       | 9          | 24 [!]  | 3.8d (High)   | |
+| +-------------------------------------------------------------------+ |
++-----------------------------------------------------------------------+
+```
 
 ---
 
-## 21. Accessibility Specification (WCAG 2.2 AA)
-- **Contrast Ratios:**
-  - Prose text against dark canvas: `14.2:1` (exceeds AAA requirement).
-  - Prose text on light dashboard: `12.6:1`.
-  - Semantic pills: Minimum `4.8:1` text-to-pill-background contrast.
-- **Focus Rings:** High-visibility 2px solid `#6366f1` ring with 2px offset on all interactive buttons, selects, and text inputs.
-- **Screen Reader Semantics:**
-  - All icon-only buttons carry mandatory `aria-label` attributes.
-  - Test runner outputs are tagged with `role="region"` and `aria-live="polite"` so results are announced upon test suite completion.
-- **Tab Navigation:** Logical tab sequences across editor, terminal, hint stepper, and submit controls.
+## 21. Interaction and Micro-interaction Guidelines
+- **Keyboard Shortcuts:**
+  - `⌘↵` / `Ctrl+Enter`: Immediately triggers **Run Tests**.
+  - `⌘S` / `Ctrl+S`: Manually forces instant draft synchronization to server.
+  - `Esc`: Dismisses modals, scorecard overlays, or popovers.
+- **Autosave Behavior:** Debounced by 2000ms. Status transitions seamlessly between `Unsaved` → `Saving…` → `Saved at HH:MM`.
+- **Assertion Failure Diffs:** Failing unit tests automatically expand in the terminal to show a structured side-by-side diff between expected and actual output.
+- **Proctoring Toast Warnings:** Blocked paste attempts or devtools triggers spawn a subtle non-blocking rose toast: `Paste blocked by proctoring policy`.
 
 ---
 
-## 22. Error Handling & Edge Cases
-
-| Scenario | System Behavior | UI Feedback |
-|:---|:---|:---|
-| **Compilation / Syntax Error** | Sandbox captures stderr without crashing | Terminal renders formatted stderr traceback with exact line pointers; Gemma linter underlines offending syntax. |
-| **Infinite Loop / Timeout** | Sandbox enforces strict 5000ms wall-clock timeout | Terminal displays amber warning badge: `Timeout Error (exceeded 5.0s). Check while loop exit conditions.` |
-| **Network Disconnection** | LocalStorage caches code keystrokes | Header shows amber indicator: `Working offline · Changes saved locally`. Auto-syncs upon reconnect. |
-| **Exam Window Blur** | Client triggers heartbeat violation event | Workspace locks immediately. Shows `ExamLockOverlay` with reason and pulsing mentor unlock indicator. |
-| **AI Rate Limit / Outage** | Service falls back gracefully to rule-based engine | Socratic hints fall back to rule-based unit test failure inspection; banner notes `Fallback Hint Engine Active`. |
+## 22. Responsive Design Guidelines
+- **Desktop (≥1024px):** Fixed dual-pane split view (55% Editor, 45% Output).
+- **Tablet (768px–1023px):** Editor and terminal stack vertically or support horizontal collapsible drawers.
+- **Mobile (<768px):** Segmented control toggle at top switches between `[Editor]` and `[Results/Terminal]` full-screen panes.
 
 ---
 
-## 23. Product Differentiation Opportunities
+## 23. Accessibility Guidelines (WCAG 2.2 AA)
+- **Contrast Ratios:** Text against dark canvas `#0a0b0f` achieves `14.2:1` (exceeds AAA). Dashboard light text achieves `12.6:1`.
+- **Keyboard Navigation:** Full focus trapping in modals (`ConfirmSubmitDialog`, `RubricScorecardModal`). Visible 2px indigo outline on active inputs.
+- **Screen Reader Announcements:** Test runner results and execution errors use `aria-live="polite"` regions.
+- **Reduced Motion:** All shimmers and pulse effects strictly respect `@media (prefers-reduced-motion: reduce)`.
 
-1. **Anti-Cheating Socratic Guardrails:** Unlike generic ChatGPT wrappers, VLM's multi-layered tutor guard guarantees that students cannot coax the AI into outputting copy-pasteable code solutions.
-2. **True Multidisciplinary Engineering Support:** Unifies Computer Science (Python/Monaco), Electronics (Logic Circuit Simulator), Data Science (Jupyter Notebooks), and Applied Sciences (Virtual Instrument Worksheets) under one unified operating system.
-3. **Deterministic Institutional Intelligence:** Risk scores and pacing flags are 100% explainable and deterministic (no hallucinated AI flags), giving department chairs justifiable metrics for academic interventions.
+---
+
+## 24. Empty, Loading, Error, and Success States
+- **Loading State:** Shimmering skeletons matching the exact geometry of cards or table rows (`PageSkeleton`, `DarkSkeleton`). Zero layout shift.
+- **Empty State:** Clean, left-aligned card text (`EmptyState`) with a descriptive message and an optional single action button.
+- **Error State:** Clear inline callouts (`InlineError`, `ErrorState`) detailing root cause and a retry button.
+- **Success State:** Subdued emerald badge or brief toast confirmation; permanent records rendered on scorecards.
+
+---
+
+## 25. Product Differentiation Opportunities
+1. **Socratic Guardrail Architecture:** Unlike commercial LLM wrappers that output complete code, VLM guarantees multi-tiered pedagogical guidance without code leakage.
+2. **True Multi-Discipline Scope:** Houses software engineering, logic circuits, data science notebooks, and virtual instrument worksheets in a single system.
+3. **Deterministic Institutional Intelligence:** Risk scores are 100% explainable and formulaic (no hallucinated AI warnings), giving academic chairs actionable justification for student interventions.
 4. **Zero-Setup Client Execution:** Complete freedom from local environment configuration friction, leveling the playing field for students with entry-level laptops.
 5. **Integrated Exam Proctoring with SEB Support:** High-stakes exam capabilities built right into the platform, avoiding expensive third-party invigilation software licenses.
 
 ---
 
-## 24. Technical Implementation Recommendations
-
-### Architecture Mapping
-- **Frontend Framework:** `Next.js 16` (App Router) + `React 19` + `Tailwind CSS 4`.
-- **Editor:** `@monaco-editor/react` (configured with `vlm-dark` custom theme and JetBrains Mono).
-- **Backend API:** `FastAPI` (Python 3.12 ASGI) with Pydantic v2 domain schemas.
-- **AI Gateway:** `google-genai` SDK targeting `gemini-2.5-flash` / `gemini-2.5-pro` with localized rule fallback adapters.
-- **Database:** Unified repository interface supporting PostgreSQL (AlloyDB / Cloud SQL / Supabase) and Firestore.
+## 26. Technical Implementation Recommendations
+- **Frontend Stack:** Next.js 16 (App Router), React 19, Tailwind CSS v4, Monaco Editor (`@monaco-editor/react`), Lucide React.
+- **Backend Stack:** FastAPI (Python 3.12 ASGI), Pydantic v2 domain schemas, pytest engine.
+- **State Management:** URL-driven state for tabs/filters; lightweight local hooks (`useApi`, `useExamLockdown`, `useProctoring`) for real-time telemetry.
+- **Database:** Unified repository architecture supporting PostgreSQL (Supabase/AlloyDB/Cloud SQL) and Firestore.
 
 ---
 
-## 25. Existing Components to Reuse (Zero Redundancy)
+## 27. Existing Components to Reuse
 
-| Existing Component | Location | Reusable Capability |
+| Component | Path | Purpose |
 |:---|:---|:---|
 | `Card`, `CardHeader` | `frontend/src/components/ui.tsx` | Standard light container frames |
-| `StatTile` | `frontend/src/components/ui.tsx` | Metric display tiles |
-| `UnderlineTabs` | `frontend/src/components/ui.tsx` | Accessible dashboard section switching |
-| `ScoreBar` | `frontend/src/components/ui.tsx` | Visual progress bars |
-| `PerformanceCard` | `frontend/src/components/intelligence.tsx` | Score distribution and rubric metrics |
-| `WorkloadCard` | `frontend/src/components/intelligence.tsx` | Faculty workload and turnaround stats |
-| `CompletionCard` | `frontend/src/components/intelligence.tsx` | Pacing gap and completion tracking |
-| `AtRiskCard` | `frontend/src/components/intelligence.tsx` | Risk factors and intervention actions |
-| `HeatmapCard` | `frontend/src/components/intelligence.tsx` | Friction points and failing assertions |
-| `TestRunnerTerminal`| `frontend/src/components/workspace/TestRunnerTerminal.tsx` | Pytest-style assertion output |
+| `StatTile` | `frontend/src/components/ui.tsx` | Standard KPI metric tiles |
+| `UnderlineTabs` | `frontend/src/components/ui.tsx` | Accessible horizontal section tabs |
+| `PerformanceCard` | `frontend/src/components/intelligence.tsx` | Student score distribution histograms |
+| `WorkloadCard` | `frontend/src/components/intelligence.tsx` | Faculty grading velocity and queue stats |
+| `CompletionCard` | `frontend/src/components/intelligence.tsx` | Cohort pacing gap tracking |
+| `AtRiskCard` | `frontend/src/components/intelligence.tsx` | Deterministic student risk table |
+| `HeatmapCard` | `frontend/src/components/intelligence.tsx` | Test assertion failure heatmap |
+| `TestRunnerTerminal`| `frontend/src/components/workspace/TestRunnerTerminal.tsx` | Pytest assertion output pane |
 | `MultiTabEditor` | `frontend/src/components/workspace/MultiTabEditor.tsx` | Monaco editor tab manager |
 | `TutorChat` | `frontend/src/components/workspace/TutorChat.tsx` | Multi-turn Socratic conversation pane |
 
 ---
 
-## 26. Implementation Roadmap
+## 28. Components to Create
+1. **`SplitPaneResizeHandle.tsx`:** Draggable divider enabling users to customize the 55%/45% split between Monaco Editor and Test Terminal.
+2. **`SubmissionHistoryDrawer.tsx`:** Side-by-side historical attempt viewer comparing student code revisions across multiple submissions.
+3. **`VivaVoicePanel.tsx`:** Interactive oral examination interface generating viva questions and recording instructor marks during practical vivas.
+4. **`AccreditationExportModal.tsx`:** Specialized modal allowing HODs to select custom semester dates and generate formatted PDF accreditation dossiers.
 
-### Phase 1: Core Foundation & Bug Polish (Current State — Complete)
+---
+
+## 29. Implementation Roadmap
+
+### Phase 1: Core Foundation & Stability (Current State — Complete)
 - [x] Monaco code execution with Pytest assertions.
 - [x] Socratic AI Tutor with prompt injection guards.
 - [x] Live Lab Exam Lockdown and Proctoring engine.
 - [x] Full Student & Faculty Intelligence Module (5 features for Faculty & HOD).
 
-### Phase 2: Enhanced Visual Ergonomics (Next Phase)
-- [ ] Implement split-pane drag resizing between Monaco editor and test runner terminal using CSS `resize` or lightweight pointer handlers.
-- [ ] Add student submission revision history viewer (allowing students to inspect previous graded attempts side-by-side).
-- [ ] Introduce dark/light theme toggle for faculty dashboard (while keeping student lab workspace strictly dark).
+### Phase 2: Ergonomic Polish & Student Experience
+- [ ] Add draggable split-pane resizing to student IDE workspace.
+- [ ] Implement submission revision history diff viewer.
+- [ ] Add dark/light mode toggle for Faculty/HOD dashboards.
 
-### Phase 3: Enterprise Accreditation & Mobile Companion
+### Phase 3: Enterprise Accreditation & Mobile Invigilation
 - [ ] Automated PDF accreditation dossier generation for NBA / NAAC compliance committee audits.
 - [ ] Faculty mobile companion PWA for real-time exam lockdown unlock approvals from a smartphone.
 
 ---
 
-## 27. Assumptions & Open Questions
+## 30. Assumptions and Open Questions
 
 ### Confirmed Functionality
-- Purely deterministic risk scoring for at-risk students (zero AI hallucinations).
-- Socratic AI tutor never emits copy-pasteable code blocks > 1 line.
-- Exam lockdown strictly enforces single-tab and fullscreen execution.
+- Deterministic risk scoring produces reliable, explainable student risk flags without AI hallucinations.
+- Socratic AI tutor strictly forbids code block output >1 line.
+- Exam lockdown strictly enforces single-session fullscreen operation.
 
 ### Documented Assumptions
-- Student workstations support modern evergreen browsers (Chrome, Edge, Firefox, Safari) with WebAssembly and Web Worker support.
-- Institutions utilize standard grading scales (0 to 10 points) compatible with the rubric criteria engine.
+- Student workstations support modern evergreen browsers with WebAssembly and Web Worker support.
+- Institutional grading adheres to a 0–10 scale compatible with the rubric engine.
 
-### Open Questions for Institutional Deployments
-- *LMS Integration:* Does the institution require LTI 1.3 integration (Canvas, Blackboard, Moodle) for automated roster and gradebook synchronization?
-- *Execution Sandbox:* For high-scale on-premise deployments, will the institution run the local subprocess runner or deploy dedicated Judge0 / Docker sandbox clusters?
+### Open Questions for Institutional Scale
+- *LMS Grade Sync:* Will institutions require LTI 1.3 integration (Canvas/Moodle/Blackboard) for automated roster and grade syncing?
+- *Sandbox Deployment:* Will production environments utilize local subprocess runners or multi-node containerized Judge0 clusters for heavy student concurrency?

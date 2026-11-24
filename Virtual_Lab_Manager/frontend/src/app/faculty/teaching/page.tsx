@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PageContainer } from "@/components/AppShell";
 import { downloadText, slugify } from "@/components/insights";
 import { Markdown } from "@/components/Markdown";
+import { VivaVoicePanel } from "@/components/VivaVoicePanel";
 import { Button, Card, CardHeader, Field, InlineError, LinkButton, PageHeader, SegmentedControl, Skeleton, inputCls } from "@/components/ui";
 import { api } from "@/lib/api";
 import type { Course, Difficulty, TeachingMaterial } from "@/lib/types";
@@ -169,17 +170,7 @@ export default function TeachingMaterialPage() {
               <List title="Common mistakes" items={material.common_mistakes} />
               <List title="Discussion questions" items={material.discussion_questions} ordered />
               {material.viva_questions.length > 0 && (
-                <section>
-                  <h2 className="mb-2 text-base font-semibold text-slate-900">Viva questions</h2>
-                  <ol className="list-decimal space-y-2 pl-5 text-sm">
-                    {material.viva_questions.map((v, i) => (
-                      <li key={i}>
-                        <p className="font-medium text-slate-900">{v.question}</p>
-                        <p className="text-slate-600">{v.answer}</p>
-                      </li>
-                    ))}
-                  </ol>
-                </section>
+                <VivaVoicePanel questions={material.viva_questions} topic={material.title} />
               )}
             </div>
           </Card>

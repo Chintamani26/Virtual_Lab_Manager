@@ -115,26 +115,68 @@ function CompletedRow({ p, showCourse }: { p: StudentPracticalSummary; showCours
   );
 }
 
-/** Course summary on the dashboard; the whole card opens the course page. */
+function ProgressRing({ value, max }: { value: number; max: number }) {
+  const pct = max > 0 ? Math.round((value / max) * 100) : 0;
+  const radius = 17;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (pct / 100) * circumference;
+
+  return (
+    <div className="relative inline-flex items-center justify-center shrink-0">
+      <svg className="h-11 w-11 -rotate-90 transform" viewBox="0 0 42 42">
+        <circle
+          cx="21"
+          cy="21"
+          r={radius}
+          className="stroke-slate-100"
+          strokeWidth="3.5"
+          fill="transparent"
+        />
+        <circle
+          cx="21"
+          cy="21"
+          r={radius}
+          className="stroke-indigo-600 transition-all duration-500 ease-out"
+          strokeWidth="3.5"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+          fill="transparent"
+        />
+      </svg>
+      <span className="absolute text-[10px] font-semibold font-mono tabular-nums text-slate-900">
+        {pct}%
+      </span>
+    </div>
+  );
+}
+
+/** Course summary on the dashboard with visual progress ring; the whole card opens the course page. */
 export function CourseCard({ course, labs }: { course: Course; labs: StudentPracticalSummary[] }) {
   const { todo, done } = splitLabs(labs);
   const next = todo[0];
   return (
     <Link
       href={`/student/courses/${course.id}`}
-      className="block rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-slate-300 hover:bg-slate-50/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:p-5"
+      className="group flex flex-col justify-between rounded-lg border border-slate-200 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:p-5"
     >
-      <p className="text-xs font-medium text-slate-500">{course.code}</p>
-      <p className="mt-0.5 truncate text-sm font-semibold text-slate-900">{course.title}</p>
-      <p className="mt-0.5 truncate text-xs text-slate-500">{course.faculty_name ?? "Faculty to be assigned"}</p>
-      <div className="mt-4">
-        <ScoreBar value={done.length} max={labs.length} tone="indigo" />
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-mono font-medium text-slate-500">{course.code}</p>
+          <p className="mt-0.5 truncate text-sm font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+            {course.title}
+          </p>
+          <p className="mt-0.5 truncate text-xs text-slate-500">{course.faculty_name ?? "Faculty to be assigned"}</p>
+        </div>
+        <ProgressRing value={done.length} max={labs.length} />
       </div>
-      <p className="mt-2 text-xs text-slate-500">
-        {labs.length === 0
-          ? "No labs published yet"
-          : `${done.length} of ${labs.length} done${next ? ` · next ${relativeDue(next.due_at).label.toLowerCase()}` : ""}`}
-      </p>
+
+      <div className="mt-3.5 pt-3 border-t border-slate-100">
+        <div className="flex items-center justify-between text-xs text-slate-500">
+          <span>{labs.length === 0 ? "No labs published" : `${done.length} of ${labs.length} completed`}</span>
+          {next && <span className="font-medium text-amber-700">{relativeDue(next.due_at).label}</span>}
+        </div>
+      </div>
     </Link>
   );
 }

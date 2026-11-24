@@ -7,6 +7,7 @@ import { AnalyticsChat } from "@/components/AnalyticsChat";
 import { BriefingCard, DifficultiesCard } from "@/components/insights";
 import { ActivityCharts, ScoreDistributionChart, ViewToggle } from "@/components/HodCharts";
 import { AtRiskCard, CompletionCard, HeatmapCard, PerformanceCard, WorkloadCard } from "@/components/intelligence";
+import { AccreditationExportModal } from "@/components/AccreditationExportModal";
 import {
   Button,
   Card,
@@ -43,6 +44,7 @@ export default function HodDashboardPage() {
   const [complianceError, setComplianceError] = useState<string | null>(null);
   const [complianceFilter, setComplianceFilter] = useState<ComplianceFilter>("all");
   const [downloading, setDownloading] = useState(false);
+  const [exportModalOpen, setExportModalOpen] = useState(false);
   const [assigning, setAssigning] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
   const [activityAsTable, setActivityAsTable] = useState(false);
@@ -138,8 +140,8 @@ export default function HodDashboardPage() {
         subtitle={`${department.code} · ${department.institution_name} · ${kpis.students} students · ${kpis.faculty} faculty`}
         actions={
           <div className="flex items-center gap-2">
-            <Button variant="secondary" size="sm" loading={downloading} onClick={downloadCsv}>
-              Export Compliance CSV
+            <Button variant="secondary" size="sm" onClick={() => setExportModalOpen(true)}>
+              Export Compliance & Dossier
             </Button>
           </div>
         }
@@ -440,6 +442,12 @@ export default function HodDashboardPage() {
           <AnalyticsChat />
         </div>
       )}
+
+      <AccreditationExportModal
+        open={exportModalOpen}
+        onClose={() => setExportModalOpen(false)}
+        compliance={compliance}
+      />
     </PageContainer>
   );
 }

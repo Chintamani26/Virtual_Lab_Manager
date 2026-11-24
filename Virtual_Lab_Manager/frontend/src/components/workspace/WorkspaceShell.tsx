@@ -1,12 +1,15 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { cx } from "@/components/ui";
 import type { MobilePane } from "./types";
+import { SplitPaneResizeHandle } from "./SplitPaneResizeHandle";
+
+const DEFAULT_LEFT_PCT = 56;
 
 /**
  * Full-height IDE frame: fixed header + stable dual-pane grid.
- * ≥ lg: editor | results side by side (fixed fractions, no reflow when results arrive).
+ * ≥ lg: editor | results side by side with draggable split pane resizing.
  * < lg: a segmented control swaps panes instead of squeezing them.
  */
 export function WorkspaceShell({
@@ -26,6 +29,8 @@ export function WorkspaceShell({
   onMobilePaneChange: (p: MobilePane) => void;
   resultsBadge?: ReactNode;
 }) {
+  const [leftPct, setLeftPct] = useState<number>(DEFAULT_LEFT_PCT);
+
   return (
     <div className="flex h-dvh flex-col overflow-hidden bg-canvas font-sans text-fg">
       {header}
@@ -55,18 +60,35 @@ export function WorkspaceShell({
         </div>
       </div>
 
-      <div className="relative grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1.32fr)_minmax(0,1fr)]">
+      <div className="relative flex min-h-0 flex-1 overflow-hidden">
+        {/* Left Pane (Editor / Instructions) */}
         <section
+          style={{ width: `${leftPct}%` }}
           className={cx(
-            "min-h-0 min-w-0 flex-col bg-surface-1 lg:flex lg:border-r lg:border-line",
-            mobilePane === "editor" ? "flex" : "hidden",
+            "min-h-0 min-w-0 flex-col bg-surface-1 lg:flex",
+            mobilePane === "editor" ? "flex w-full" : "hidden lg:flex",
           )}
         >
           {left}
         </section>
-        <section className={cx("min-h-0 min-w-0 flex-col bg-surface-1 lg:flex", mobilePane === "results" ? "flex" : "hidden")}>
+
+        {/* Draggable Divider Handle (Desktop) */}
+        <SplitPaneResizeHandle
+          onResize={setLeftPct}
+          onReset={() => setLeftPct(DEFAULT_LEFT_PCT)}
+        />
+
+        {/* Right Pane (Test Runner Terminal & Socratic Drawer) */}
+        <section
+          style={{ width: `${100 - leftPct}%` }}
+          className={cx(
+            "min-h-0 min-w-0 flex-col bg-surface-1 lg:flex",
+            mobilePane === "results" ? "flex w-full" : "hidden lg:flex",
+          )}
+        >
           {right}
         </section>
+
         {overlays}
       </div>
     </div>
